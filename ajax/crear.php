@@ -13,7 +13,7 @@ $info=[];
 
 
 
-  $query=$query="INSERT INTO suscriptions (name, surname, email, type) VALUES ('$name', '$surname', '$email', '$type')";
+  $query="INSERT INTO suscriptions (name, surname, email, type) VALUES ('$name', '$surname', '$email', '$type')";
   $resutltado=mysqli_query($conn, $query);
   verify($resultado);
   close($conn);

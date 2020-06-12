@@ -79,6 +79,9 @@ Class User {
   //**loguer**//
 		public static function loger($email, $pass)
 		{
+            if ($_REQUEST['csrf_token'] != $_SESSION['csrf_token']['token']) {
+                die('Acceso no permitido');
+            }
 			global $connection;
 
 			$query = $connection->prepare("
@@ -96,12 +99,31 @@ Class User {
 
 					$_SESSION['email']=$info['email'];
 
-					setcookie("email", $_SESSION['email'], time() + 60 * 60 * 24 * 30);
-				}else{
-					echo '<p> Esta mal logueado</p>';
+                    setcookie("email", $_SESSION['email'], time() + 60 * 60 * 24 * 30);
+                    
+                    header('Location: admin.php');
+                    exit();
 
-				 }
-		}
+				}else{
+					Alert::set_msg('Identificacion incorrecta', 'danger');
+
+                    header('Location: adminLogin.php');
+                    exit();
+				}
+        }
+        
+
+    function logout()
+    {
+        session_unset();
+        session_destroy();
+        session_write_close();
+        setcookie(session_name(),'',0,'/');
+
+        header('Location: adminLogin.php');
+        exit();
+    }
+    
     //**todos los usuarios**//
     public static function lista(){
       global $connection;
