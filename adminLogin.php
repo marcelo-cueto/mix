@@ -1,7 +1,12 @@
 <?php 
 session_start();
+
 include_once 'partials/head.php';
 require_once 'controllers/Alert.php';
+
+if($_POST){
+    user::Loger($_POST);
+}
 ?>
 <div class="container">
     <div class="row">
@@ -10,7 +15,7 @@ require_once 'controllers/Alert.php';
             <h2 class="mt-5 mb-3">ENLACE PROFESIONAL</h2>
             <div>
                 <h3>Inicio de Sesión</h3>
-                <form class="form-inicio" action="admin.php" method="post">
+                <form class="form-inicio" action="adminLogin.php" method="post">
                     <input class="icon-mail" name="email" type="email" placeholder="Email" required>
                     <input class="icon-pass" name="pass" type="password" placeholder="Contraseña" required>
                     <input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token']['token']; ?> >

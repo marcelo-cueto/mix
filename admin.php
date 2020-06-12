@@ -1,7 +1,14 @@
-<?php include_once 'partials/head.php'; ?>
-<?php include_once 'partials/sidebar.php'; 
+<?php 
+session_start();
 
-?>
+
+if (!isset($_SESSION['email'])) {
+    header('Location: adminLogin.php');
+    exit();
+}
+
+include_once 'partials/head.php'; ?>
+<?php include_once 'partials/sidebar.php'; ?>
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
