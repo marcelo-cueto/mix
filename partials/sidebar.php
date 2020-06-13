@@ -22,7 +22,9 @@
         <li>
           <a href="administradores.php"><span class="fa fa-sticky-note mr-3"></span> Administradores</a>
         </li>
-      
+        <li>
+          <a href="adminLogout.php"><span class="fa fa-sticky-note mr-3"></span> Cerrar Sesion</a>
+        </li>
       </ul>
 
     </nav>

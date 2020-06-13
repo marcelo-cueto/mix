@@ -1,4 +1,6 @@
 <?php
+require_once 'ajax/conect.php';
+
 Class User {
   private $id;
   private $uname;
@@ -82,20 +84,15 @@ Class User {
             if ($_REQUEST['csrf_token'] != $_SESSION['csrf_token']['token']) {
                 die('Acceso no permitido');
             }
-			global $connection;
+            global $conn;
 
-			$query = $connection->prepare("
-				SELECT *
-				FROM Users
-  			WHERE email = '$email'
-			");
+			$query = $conn->prepare("SELECT * FROM Users WHERE email = '$email'");
 
 			$query->execute();
 
-			$info=$query->fetch();
+			$info=$query->fetch(PDO::FETCH_ASSOC);
 
-			if($pass==$info['password']){
-
+			if($pass==$info['pass']){
 
 					$_SESSION['email']=$info['email'];
 
@@ -105,6 +102,7 @@ Class User {
                     exit();
 
 				}else{
+                    
 					Alert::set_msg('Identificacion incorrecta', 'danger');
 
                     header('Location: adminLogin.php');
@@ -113,14 +111,14 @@ Class User {
         }
         
 
-    function logout()
+    public static function logout()
     {
         session_unset();
         session_destroy();
         session_write_close();
         setcookie(session_name(),'',0,'/');
 
-        header('Location: adminLogin.php');
+        header('Location: index.php');
         exit();
     }
     
