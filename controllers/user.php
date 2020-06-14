@@ -1,5 +1,5 @@
 <?php
-require_once 'ajax/conect.php';
+require_once 'controllers/conectPDO.php';
 
 Class User {
   private $id;
@@ -90,9 +90,9 @@ Class User {
 
 			$query->execute();
 
-			$info=$query->fetch(PDO::FETCH_ASSOC);
+            $info=$query->fetch(PDO::FETCH_ASSOC);
 
-			if($pass==$info['pass']){
+            if(sha1($pass) === $info['pass']) {
 
 					$_SESSION['email']=$info['email'];
 

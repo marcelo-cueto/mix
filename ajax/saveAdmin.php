@@ -6,13 +6,13 @@ $id=$_POST['id'];
 $name=$_POST['name'];
 
 $email=$_POST['email'];
-$type=$_POST['pass'];
+$type=$_POST['pass']; // type o pass?
 
 $info=[];
 
 
-
-  $query="UPDATE users SET name = '$name', email= '$email', pass= '$pass' WHERE users.id = '$id'";
+    $encrypted_pass = sha1($pass);
+  $query="UPDATE users SET name = '$name', email= '$email', pass= '$encrypted_pass' WHERE users.id = '$id'";
   $resutltado=mysqli_query($conn, $query);
   verify($resultado);
   close($conn);

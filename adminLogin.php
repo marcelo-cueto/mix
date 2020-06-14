@@ -1,10 +1,10 @@
-<?php 
+<?php
 session_start();
 
 include_once 'partials/head.php';
 require_once 'controllers/Alert.php';
 require_once 'controllers/user.php';
-if($_POST){
+if ($_POST) {
     user::Loger($_POST["email"], $_POST["pass"]);
 }
 ?>
@@ -18,7 +18,7 @@ if($_POST){
                 <form class="form-inicio" action="adminLogin.php" method="post">
                     <input class="icon-mail" name="email" type="email" placeholder="Email" required>
                     <input class="icon-pass" name="pass" type="password" placeholder="Contraseña" required>
-                    <input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token']['token']; ?> >
+                    <input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token']['token']; ?>>
                     <br>
                     <a href="recuperar">No recuerdo mi clave</a>
                     <br>

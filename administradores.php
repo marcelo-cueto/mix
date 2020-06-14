@@ -8,6 +8,7 @@ if (!isset($_SESSION['email'])) {
 include_once 'partials/head.php'; ?>
 <?php include_once 'partials/sidebar.php'; ?>
 
+
 <div id="content" class="p-4 p-md-5 pt-5">
   <h2 class="mb-4" style="width:80%">Administradores</h2>
   <button type='button' id='' class='add btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
