@@ -11,9 +11,9 @@ $pass=$_POST['pass'];
 
 $info=[];
 
+$pass = sha1($pass);
 
-
-  $query="INSERT INTO users (id, name, email, pass) VALUES (NULL, '$name', '$email', '$pass')";
+  $query="INSERT INTO users (id,name, email, pass) VALUES (NULL,'$name', '$email', '$pass')";
   $resutltado=mysqli_query($conn, $query);
   verify($resultado);
   close($conn);
