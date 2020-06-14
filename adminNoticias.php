@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 
 if (!isset($_SESSION['email'])) {
@@ -9,30 +9,34 @@ include_once 'partials/head.php'; ?>
 <?php include_once 'partials/sidebar.php'; ?>
 
 <div id="content" class="p-4 p-md-5 pt-5">
-  <h2 class="mb-4">Suscriptores</h2>
+  <h2 class="mb-4">Noticias</h2>
   <button type='button' class='add btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>
   <div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar" >
-       <h2 class="mb-4">Editar suscriptor</h2>
-       <form id="editform" action="" method="post">
+       <h2 class="mb-4">Editar Noticias</h2>
+       <form id="editform" action="" method="post" class="col-sm-12 col-md-12 col-lg-12">
          <div class="form-row">
-          <div class="col">
-         <input type="hidden" name="form" value="1">
+
+
          <input type="hidden" class='id' name='id' value="" >
-         <label for="name">Nombre</label>
-         <input type="text" class='name form-control' name='name' value="">
-         <label for="surname">Apellido</label>
-         <input type="text" class='surname form-control' name='surname' value="" >
-        </div>
-        <div class="col">
-         <label for="email">Email</label>
-         <input type="email" class='email form-control' name='email' value="">
-         <label for="type">Tipo de Suscripcion</label>
-         <input type="text" class='type form-control' name='type' value="" >
+         <label for="title">Titulo</label>
+         <input type="text" class='title form-control' name='title' value="">
+         <label for="text">Texto</label>
+         <textarea id='text'name="text" class='text form-control 'rows="12" ></textarea>
+
+
+
+         <input type="file" class='img form-control' name='img' value="" >
+
+
+
+
+
          <input type="hidden" name="opcion" value="modificar">
-         <input id="" type="submit" class="btn btn-primary" value="Guardar">
-         <input id="listar" type="button" class="btn btn-primary" value="Listar">
-         <input id="crear" type="button" class="btn btn-primary" value="Crear">
-         </div>
+         <input id="crear" type="button" class="btn btn-primary" value="Crear" style="margin: 1%">
+         <input id="" type="submit" class="btn btn-primary" value="Guardar" style="margin: 1%">
+         <input id="listar" type="button" class="btn btn-primary" value="Listar" style="margin: 1%">
+
+
          </div>
 
 
@@ -40,7 +44,7 @@ include_once 'partials/head.php'; ?>
 
 
        </form>
-       <form class="deleteform" action="" method="post">
+       <form class="deleteform" action="" method="post"  style="align:center">
          <input type="hidden" class='id' name='id' value="" >
          <input type="hidden" class='opcion1' name="opcion" value="eliminar">
          <input id="elimiar" type="button" class="btn btn-danger" value="eliminar">
@@ -55,15 +59,15 @@ include_once 'partials/head.php'; ?>
      <div id="cuadro1" class="col-sm-12 col-md-12 col-lg-12">
 
 
-  <table class="suscritors table table-striped table-bordered" style="width:100%">
+  <table class="notice table table-striped table-bordered" style="width:100%">
     <thead>
 
 
     <tr>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Email</th>
-      <th>Tipo de Suscripcion</th>
+      <th>Titulo</th>
+      <th>Noticia</th>
+      <th>Imagen</th>
+      <th>Fecha de creación</th>
       <th></th>
     </tr>
     </thead>
@@ -77,7 +81,6 @@ include_once 'partials/head.php'; ?>
 
 
 </body>
-<script src="js/jquery.min.js"></script>
 
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
@@ -85,15 +88,17 @@ include_once 'partials/head.php'; ?>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="js/dataTables.buttons.min.js"></script>
-<script src="js/buttons.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="js/buttons.bootstrap.min.js"></script>
 <!--Libreria para exportar Excel-->
-<script src="js/jszip.min.js"></script>
+<script type="text/javascript" src="js/jszip.min.js"></script>
 <!--Librerias para exportar PDF-->
 
-<script src="js/vfs_fonts.js"></script>
+<script type="text/javascript" src="js/vfs_fonts.js"></script>
 <!--Librerias para botones de exportación-->
 <script src="js/buttons.html5.min.js"></script>
+
+
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -102,12 +107,14 @@ include_once 'partials/head.php'; ?>
     eliminar();
     dataAdd();
     crear();
+    $('#text').Editor();
 
   })
-
   $('#listar').on('click', function(){
     listar();
   })
+
+
   var guardar=function(){
     $('#editform').on('submit', function(e){
       e.preventDefault();
@@ -115,7 +122,7 @@ include_once 'partials/head.php'; ?>
       console.log(frm);
       $.ajax({
         method:'POST',
-        url: 'ajax/save.php',
+        url: 'ajax/saveNotice.php',
         data: frm
       }).done(function(info){
         console.log(info);
@@ -131,12 +138,11 @@ include_once 'partials/head.php'; ?>
       console.log(frm);
       $.ajax({
         method:'POST',
-        url: 'ajax/crear.php',
+        url: 'ajax/createNotice.php',
         data: frm
       }).done(function(info){
         console.log(info);
-        limpiar_datos();
-        listar();
+
       })
     })
   }
@@ -159,17 +165,17 @@ include_once 'partials/head.php'; ?>
   var listar=function(){
     $("#cuadro2").slideUp("slow");
     $("#cuadro1").slideDown("slow");
-    var table=$('.suscritors').DataTable({
+    var table=$('.notice').DataTable({
       'destroy':true,
       'ajax':{
         'method':'POST',
-        'url': 'ajax/susajax.php'
+        'url': 'ajax/noticeajax.php'
       },
       'columns':[
-        {'data':'name'},
-        {'data':'surname'},
-        {'data':'email'},
-        {'data':'type'},
+        {'data':'title'},
+        {'data':'texto'},
+        {'data':'img'},
+        {'data':'dates'},
         {'defaultContent': "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	" }
       ],
       "language":idioma,
@@ -178,7 +184,7 @@ include_once 'partials/head.php'; ?>
 
           {
               extend:    'excelHtml5',
-              text:      '<i class="far fa-file-excel-o fa-2x"></i>',
+              text:      '<i class="fa fa-file-text-o fa-2x"></i>',
               titleAttr: 'Excel'
           },
           {
@@ -195,8 +201,8 @@ include_once 'partials/head.php'; ?>
 
 
     });
-      dataObteiner('.suscritors tbody', table);
-      dataDeleter('.suscritors tbody', table);
+      dataObteiner('.notice tbody', table);
+      dataDeleter('.notice tbody', table);
 
 
     }
@@ -253,10 +259,10 @@ include_once 'partials/head.php'; ?>
 
     var limpiar_datos = function(){
     $(".id").val("");
-    $(".name").val("");
-    $(".surname").val("");
-    $(".email").val("");
-    $(".type").val("");
+    $(".title").val("");
+    $(".text").val("");
+    $(".img").val("");
+    $(".date").val("");
     }
 
     var dataObteiner=function(tbody, table){
@@ -264,19 +270,20 @@ include_once 'partials/head.php'; ?>
       var data=table.row($(this).parents('tr')).data();
 
       var form=$('.form').val(1)
-          id=$('.id').val( data.id);
-          name=$('.name').val( data.name);
-          apellido=$('.surname').val(data.surname);
-          email=$('.email').val(data.email);
-          type=$('.type').val(data.type);
+          id=$('.id').val(data.id);
+          title=$('.title').val(data.title);
+          text=$('.text').val(data.text);
+          date=$('.date').val(data.date);
+
           var opcion='modificar';
           $("#cuadro2").slideDown("slow");
           $("#cuadro1").slideUp("slow");
     });
     };
     var dataAdd=function(){
-      limpiar_datos();
+
     $('.add').on('click', function(){
+      limpiar_datos();
       var form=$('.form').val(0);
           id=$('.id').val('null');
       var opcion='crear';

@@ -3,21 +3,18 @@
 include ('conect.php');
 
 print_r($_POST);
+$id=$_POST['id'];
 
-$name=$_POST['name'];
-$surname=$_POST['surname'];
-$email=$_POST['email'];
-$type=$_POST['type'];
-$opcion=$_POST['opcion'];
+
 $info=[];
 
 
 
-  $query=$query="INSERT INTO suscriptions (name, surname, email, type) VALUES ('$name', '$surname', '$email', '$type')";
+
+  $query="DELETE FROM users WHERE id='$id'";
   $resutltado=mysqli_query($conn, $query);
   verify($resultado);
   close($conn);
-
 
 function verify($resultado){
   if(!$resultado){

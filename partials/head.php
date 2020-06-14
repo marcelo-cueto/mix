@@ -19,7 +19,12 @@
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style1.css">
     <!--Javascript-->
     <script type="text/javascript" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script type="text/javascript"  src="js/jquery.min.js"></script>
+    <script type="text/javascript"  src="js/jquery-1.12.3.js"></script>
+  	<script type="text/javascript" src="js/editor.js"></script>
 
+  	<link rel="stylesheet" type="text/css" href="css/editor.css">
   </head>

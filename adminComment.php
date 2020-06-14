@@ -9,49 +9,25 @@ include_once 'partials/head.php'; ?>
 <?php include_once 'partials/sidebar.php'; ?>
 
 <div id="content" class="p-4 p-md-5 pt-5">
-  <h2 class="mb-4">Suscriptores</h2>
-  <button type='button' class='add btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>
+  <h2 class="mb-4">Comentarios</h2>
+
   <div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar" >
-       <h2 class="mb-4">Editar suscriptor</h2>
-       <form id="editform" action="" method="post">
-         <div class="form-row">
-          <div class="col">
-         <input type="hidden" name="form" value="1">
-         <input type="hidden" class='id' name='id' value="" >
-         <label for="name">Nombre</label>
-         <input type="text" class='name form-control' name='name' value="">
-         <label for="surname">Apellido</label>
-         <input type="text" class='surname form-control' name='surname' value="" >
-        </div>
-        <div class="col">
-         <label for="email">Email</label>
-         <input type="email" class='email form-control' name='email' value="">
-         <label for="type">Tipo de Suscripcion</label>
-         <input type="text" class='type form-control' name='type' value="" >
-         <input type="hidden" name="opcion" value="modificar">
-         <input id="" type="submit" class="btn btn-primary" value="Guardar">
-         <input id="listar" type="button" class="btn btn-primary" value="Listar">
-         <input id="crear" type="button" class="btn btn-primary" value="Crear">
-         </div>
-         </div>
+       <h2 class="mb-4">Eliminar Comentarios</h2>
 
-
-
-
-
-       </form>
        <form class="deleteform" action="" method="post">
          <input type="hidden" class='id' name='id' value="" >
          <input type="hidden" class='opcion1' name="opcion" value="eliminar">
-         <input id="elimiar" type="button" class="btn btn-danger" value="eliminar">
+         <div class="mensaje">
+
+         </div>
+         <input id="elimiar" type="button" class="btn btn-danger" value="eliminar" style='margin: 2% '>
+         <input id="listar" type="button" class="btn btn-primary" value="Cancelar" style="margin: 2%">
 
    		</form>
 
 
      </div>
-     <div class="mensaje">
 
-     </div>
      <div id="cuadro1" class="col-sm-12 col-md-12 col-lg-12">
 
 
@@ -60,10 +36,10 @@ include_once 'partials/head.php'; ?>
 
 
     <tr>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Email</th>
-      <th>Tipo de Suscripcion</th>
+      <th>Noticia</th>
+      <th>Comentario</th>
+      <th>fecha</th>
+      <th>Autor comentario</th>
       <th></th>
     </tr>
     </thead>
@@ -98,58 +74,28 @@ include_once 'partials/head.php'; ?>
 <script type="text/javascript">
   $(document).ready(function() {
     listar();
-    guardar();
+
     eliminar();
-    dataAdd();
-    crear();
+
+
 
   })
 
   $('#listar').on('click', function(){
+    limpiar_datos();
     listar();
   })
-  var guardar=function(){
-    $('#editform').on('submit', function(e){
-      e.preventDefault();
-      var frm=$(this).serialize();
-      console.log(frm);
-      $.ajax({
-        method:'POST',
-        url: 'ajax/save.php',
-        data: frm
-      }).done(function(info){
-        console.log(info);
-        limpiar_datos();
-        listar();
-      })
-    })
-  }
-  var crear=function(){
-    $('#crear').on('click', function(e){
 
-      var frm=$('#editform').serialize();
-      console.log(frm);
-      $.ajax({
-        method:'POST',
-        url: 'ajax/crear.php',
-        data: frm
-      }).done(function(info){
-        console.log(info);
-        limpiar_datos();
-        listar();
-      })
-    })
-  }
   var eliminar=function(){
     $('#elimiar').on('click', function(e){
-      var id=$('#editform .id').val()
-      console.log(id);
+      var frm=$('.deleteform').serialize();
+      console.log(frm);
       $.ajax({
         method:'POST',
-        url: 'ajax/elimiar.php',
-        data: {'id':id}
+        url: 'ajax/eliminarcom.php',
+        data: frm
       }).done(function(info){
-        console.log(info);
+
         limpiar_datos();
         listar();
 
@@ -163,14 +109,14 @@ include_once 'partials/head.php'; ?>
       'destroy':true,
       'ajax':{
         'method':'POST',
-        'url': 'ajax/susajax.php'
+        'url': 'ajax/comajax.php'
       },
       'columns':[
-        {'data':'name'},
-        {'data':'surname'},
-        {'data':'email'},
-        {'data':'type'},
-        {'defaultContent': "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	" }
+        {'data':'titulo'},
+        {'data':'comentario'},
+        {'data':'fecha'},
+        {'data':'suscriptor'},
+        {'defaultContent': "</button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>	" }
       ],
       "language":idioma,
         dom: 'Bfrtip',
@@ -178,7 +124,7 @@ include_once 'partials/head.php'; ?>
 
           {
               extend:    'excelHtml5',
-              text:      '<i class="far fa-file-excel-o fa-2x"></i>',
+              text:      '<i class="far fa-file-excel fa-2x"></i>',
               titleAttr: 'Excel'
           },
           {
@@ -195,7 +141,7 @@ include_once 'partials/head.php'; ?>
 
 
     });
-      dataObteiner('.suscritors tbody', table);
+
       dataDeleter('.suscritors tbody', table);
 
 
@@ -253,44 +199,18 @@ include_once 'partials/head.php'; ?>
 
     var limpiar_datos = function(){
     $(".id").val("");
-    $(".name").val("");
-    $(".surname").val("");
-    $(".email").val("");
-    $(".type").val("");
+
     }
 
-    var dataObteiner=function(tbody, table){
-    $(tbody).on('click','button.editar', function(){
-      var data=table.row($(this).parents('tr')).data();
 
-      var form=$('.form').val(1)
-          id=$('.id').val( data.id);
-          name=$('.name').val( data.name);
-          apellido=$('.surname').val(data.surname);
-          email=$('.email').val(data.email);
-          type=$('.type').val(data.type);
-          var opcion='modificar';
-          $("#cuadro2").slideDown("slow");
-          $("#cuadro1").slideUp("slow");
-    });
-    };
-    var dataAdd=function(){
-      limpiar_datos();
-    $('.add').on('click', function(){
-      var form=$('.form').val(0);
-          id=$('.id').val('null');
-      var opcion='crear';
-          $("#cuadro2").slideDown("slow");
-          $("#cuadro1").slideUp("slow");
-    });
-  };
     var dataDeleter=function(tbody, table){
   $(tbody).on('click','button.eliminar', function(){
     var data=table.row($(this).parents('tr')).data();
-    var id=$('.deleteform .id').val(data.id);
-    var opcion='eliminar'
+    var id=$('.id').val(data.coment_id);
     console.log(id);
-
+    $("#cuadro2").slideDown("slow");
+    $("#cuadro1").slideUp("slow");
+    $(".mensaje").html( '<strong>Cuidado</strong>, ustdes esta <strong>Borrando</strong> el siguiente comentario:"'+data.comentario+'".' ).css({"color":'#C9302C', 'margin-botton':'3%'});
 
 });
 };

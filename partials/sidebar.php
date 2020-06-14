@@ -17,14 +17,12 @@
             <a href="adminSuscriptores.php"><span class="fa fa-user mr-3"></span> Suscriptores</a>
         </li>
         <li>
-          <a href="adminComentarios.php"><span class="fa fa-sticky-note mr-3"></span> Comentarios</a>
+          <a href="adminComment.php"><span class="fa fa-sticky-note mr-3"></span> Comentarios</a>
         </li>
         <li>
           <a href="administradores.php"><span class="fa fa-sticky-note mr-3"></span> Administradores</a>
         </li>
-        <li>
-          <a href="adminLogout.php"><span class="fa fa-sticky-note mr-3"></span> Cerrar Sesion</a>
-        </li>
+
       </ul>
 
     </nav>

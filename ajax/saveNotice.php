@@ -3,17 +3,17 @@
 include ('conect.php');
 
 print_r($_POST);
+$id=$_POST['id'];
+$title=$_POST['title'];
+$text=$_POST['text'];
 
-$name=$_POST['name'];
-$surname=$_POST['surname'];
-$email=$_POST['email'];
-$type=$_POST['type'];
-$opcion=$_POST['opcion'];
+$date=$_POST['date'];
+
 $info=[];
 
 
 
-  $query=$query="INSERT INTO suscriptions (name, surname, email, type) VALUES ('$name', '$surname', '$email', '$type')";
+  $query="UPDATE notices SET title = '$title', texto = '$text', dates= NOW() WHERE notices.id = '$id'";
   $resutltado=mysqli_query($conn, $query);
   verify($resultado);
   close($conn);

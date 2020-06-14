@@ -5,15 +5,15 @@ include ('conect.php');
 print_r($_POST);
 
 $name=$_POST['name'];
-$surname=$_POST['surname'];
+
 $email=$_POST['email'];
-$type=$_POST['type'];
-$opcion=$_POST['opcion'];
+$pass=$_POST['pass'];
+
 $info=[];
 
 
 
-  $query=$query="INSERT INTO suscriptions (name, surname, email, type) VALUES ('$name', '$surname', '$email', '$type')";
+  $query=$query="INSERT INTO users (id,name, email, pass) VALUES (NULL,'$name', '$email', '$pass')";
   $resutltado=mysqli_query($conn, $query);
   verify($resultado);
   close($conn);
