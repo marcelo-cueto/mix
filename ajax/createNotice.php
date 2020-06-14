@@ -13,7 +13,7 @@ $info=[];
 
 
   $query=$query="INSERT INTO notices (id, title, texto, dates, img) VALUES (NULL,'$title', '$text1', '2020-06-03 15:52:00','$img')";
-  $resutltado=mysqli_query($conn, $query);/
+  $resutltado=mysqli_query($conn, $query);
   verify($resultado);
   close($conn);
 

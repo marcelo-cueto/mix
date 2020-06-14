@@ -86,30 +86,30 @@ Class User {
             }
             global $conn;
 
-			$query = $conn->prepare("SELECT * FROM Users WHERE email = '$email'");
+			$query = $conn->prepare("SELECT * FROM users WHERE email = '$email'");
 
 			$query->execute();
 
             $info=$query->fetch(PDO::FETCH_ASSOC);
 
-            if(sha1($pass) === $info['pass']) {
+            if($pass === $info['pass']) {
 
 					$_SESSION['email']=$info['email'];
 
                     setcookie("email", $_SESSION['email'], time() + 60 * 60 * 24 * 30);
-                    
+
                     header('Location: admin.php');
                     exit();
 
 				}else{
-                    
+
 					Alert::set_msg('Identificacion incorrecta', 'danger');
 
                     header('Location: adminLogin.php');
                     exit();
 				}
         }
-        
+
 
     public static function logout()
     {
@@ -121,7 +121,7 @@ Class User {
         header('Location: index.php');
         exit();
     }
-    
+
     //**todos los usuarios**//
     public static function lista(){
       global $connection;

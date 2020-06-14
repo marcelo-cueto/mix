@@ -9,23 +9,24 @@ include_once 'partials/head.php'; ?>
 <?php include_once 'partials/sidebar.php'; ?>
 
 
+
 <div id="content" class="p-4 p-md-5 pt-5">
   <h2 class="mb-4" style="width:80%">Administradores</h2>
   <button type='button' id='' class='add btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
   <div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar" >
        <h2 class="mb-4">Editar suscriptor</h2>
-       <form id="editform" action="" method="post">
+       <form id="editform" action="" method="post" class='needs-validation'>
          <div class="form-row">
           <div class="col">
          <input type="hidden" class='id' name='id' value="" >
          <label for="name">Nombre</label>
-         <input type="text" class='name form-control' name='name' value="">
+         <input type="text" class='name form-control' name='name' value="" required>
          <label for="type">Contraseña</label>
-         <input type="password" class='pass form-control' name='pass' value="" >
+         <input type="password" class='pass form-control' name='pass' value="" required>
         </div>
         <div class="col">
          <label for="email">Email</label>
-         <input type="email" class='email form-control' name='email' value="">
+         <input type="email" class='email form-control' name='email' value="" required>
 
          <input type="hidden" name="opcion" value="modificar">
          <input id="" type="submit" class="btn btn-primary" value="Guardar">
@@ -75,7 +76,7 @@ include_once 'partials/head.php'; ?>
 
 
   </body>
-  <script src="js/jquery.min.js"></script>
+
 
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
@@ -94,12 +95,30 @@ include_once 'partials/head.php'; ?>
   <script src="js/buttons.html5.min.js"></script>
 
   <script type="text/javascript">
+  (function() {
+
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
     $(document).ready(function() {
       listar();
       guardar();
       eliminar();
       dataAdd();
       crear();
+
 
     })
 
@@ -176,7 +195,7 @@ include_once 'partials/head.php'; ?>
 
             {
                 extend:    'excelHtml5',
-                text:      '<i class="far fa-file-excel fa-2x"></i>',
+                text:      '<i class="fa fa-file-text-o fa-2x"></i>',
                 titleAttr: 'Excel'
             },
             {
