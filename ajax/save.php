@@ -10,6 +10,15 @@ $email=$_POST['email'];
 $type=$_POST['type'];
 $opcion=$_POST['opcion'];
 $info=[];
+
+
+
+  $query="UPDATE suscriptions SET name = '$name', surname= '$surname', email= '$email', type= $type WHERE suscriptions.id = '$id'";
+  $resutltado=mysqli_query($conn, $query);
+  verify($resultado);
+  close($conn);
+
+
 function verify($resultado){
   if(!$resultado){
     $info['respuesta']='BIEN';
@@ -21,18 +30,3 @@ function verify($resultado){
 function close($conn){
   mysqli_close($conn);
 }
-switch ($opcion) {
-  case 0:
-  $query="UPDATE suscriptions SET name = '$name', surname= '$surname', email= '$email', type= $type WHERE suscriptions.id = '$id'";
-  $resutltado=mysqli_query($conn, $query);
-  break;
-
-  case 1:
-  $query="INSERT INTO suscriptions (name, surname, email, type) VALUES ('$name', '$surname', '$email', '$type')";
-  $resutltado=mysqli_query($conn, $query);
-    break;
-}
-
-
-  verify($resultado);
-  close($conn);
