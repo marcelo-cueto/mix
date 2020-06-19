@@ -1,7 +1,7 @@
 <?php
 include ('conect.php');
 
-print_r($_POST);
+
 $id=$_POST['id'];
 $name=$_POST['name'];
 
@@ -11,39 +11,62 @@ $opcion=$_POST['opcion'];
 
 function verify($resultado){
   if(!$resultado){
-    $info['respuesta']='BIEN';
+    $info=2;
   }else{
-    $info['respuesta']='ERROR';
+    $info=1;
   }
   echo json_encode($info);
+}
+function existe_usuario($email, $conn){
+  $query = "SELECT * FROM users WHERE email = '$email'";
+  $resultado = mysqli_query($conn, $query);
+  $existe_usuario = mysqli_num_rows( $resultado );
+  return $existe_usuario;
 }
 function close($conn){
   mysqli_close($conn);
 }
-
+$info=[];
+$encrypted_pass = sha1($pass);
 switch ($opcion) {
   case 0:
-  $info=[];
+  if( $name != "" && $pass != "" && $email != "" ){
+
+        $query="UPDATE users SET name = '$name', email= '$email', pass='$encrypted_pass' WHERE users.id = '$id'";
+        $resutltado=mysqli_query($conn, $query);
+        verify($resutltado);
+        close($conn);
 
 
-    $encrypted_pass = sha1($pass);
-    $query="UPDATE users SET name = '$name', email= '$email', pass='$encrypted_pass' WHERE users.id = '$id'";
-    $resutltado=mysqli_query($conn, $query);
-
+  }else{
+    $info= 4;
+    echo json_encode($info);
+  }
 
     break;
 
   case 1:
-  $info=[];
+  if( $name != "" && $pass != "" && $email != "" ){
+      $existe = existe_usuario($email, $conn);
+      if($existe>0){
+        $info=3;
+        echo json_encode($info);
+      }else{
+        $query="INSERT INTO users (id,name, email, pass) VALUES (NULL,'$name', '$email', '$encrypted_pass')";
+        $resutltado=mysqli_query($conn, $query);
+        verify($resutltado);
+        close($conn);
+    }
+
+  }else{
+    $info= 4;
+    echo json_encode($info);
+  }
 
 
 
-    $query="INSERT INTO users (id,name, email, pass) VALUES (NULL,'$name', '$email', '$pass')";
-    $resutltado=mysqli_query($conn, $query);
-    
+
 
 
     break;
 }
-verify($resultado);
-close($conn);

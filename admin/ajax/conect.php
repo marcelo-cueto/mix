@@ -1,8 +1,8 @@
 <?php
-  $server='127.0.0.1';
+  $server='localhost';
   $db='florencia';
 	$user = 'root';
-	$pass = 'root';
+	$pass = 'O6o2i987*';
 
   $conn=mysqli_connect($server,$user,$pass,$db);
   if(!$conn){

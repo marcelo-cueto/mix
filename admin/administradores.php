@@ -54,11 +54,11 @@ include_once 'partials/head.php'; ?>
 
 
        </div>
-       <div class="mensaje">
 
-       </div>
        <div id="cuadro1" class="col-sm-12 col-md-12 col-lg-12">
+         <div class="mensaje">
 
+         </div>
 
     <table class="suscritors table table-striped table-bordered" style="width:100%">
       <thead>
@@ -120,7 +120,7 @@ include_once 'partials/head.php'; ?>
       listar();
       guardar();
       eliminar();
-      dataAdd();
+      dataObteiner();
       dataAdd();
 
     })
@@ -139,6 +139,7 @@ include_once 'partials/head.php'; ?>
           data: frm
         }).done(function(info){
           console.log(info);
+          mostrar_mensaje(info);
           limpiar_datos();
           listar();
         })
@@ -234,28 +235,37 @@ include_once 'partials/head.php'; ?>
           "colvis": "Visibilidad"
       }
   }
-      var mostrar_mensaje = function( informacion ){
-        var texto = "", color = "";
-        if( informacion.respuesta == "BIEN" ){
-        texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
-        color = "#379911";
-        }else if( informacion.respuesta == "ERROR"){
-        texto = "<strong>Error</strong>, no se ejecutó la consulta.";
-        color = "#C9302C";
-        }else if( informacion.respuesta == "EXISTE" ){
-        texto = "<strong>Información!</strong> el usuario ya existe.";
-        color = "#5b94c5";
-        }else if( informacion.respuesta == "VACIO" ){
-        texto = "<strong>Advertencia!</strong> debe llenar todos los campos solicitados.";
-        color = "#ddb11d";
-        }
+  var mostrar_mensaje = function(informacion){
 
-      $(".mensaje").html( texto ).css({"color": color });
-      $(".mensaje").fadeOut(5000, function(){
-      $(this).html("");
-      $(this).fadeIn(3000);
-      });
-      }
+    switch (informacion) {
+      case '1':
+        var texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+        var color = "#379911";
+        break;
+      case '2':
+        var texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+        var color = "#C9302C";
+        break;
+
+      case '3':
+        var texto = "<strong>Información!</strong> el email ya se encontraba registrado.";
+        var color = "#C9302C";
+
+        break;
+      case '4':
+        var texto = "<strong>Advertencia!</strong> debe llenar todos los campos solicitados.";
+        var color = "#ddb11d";
+        break;
+
+    }
+
+
+    $(".mensaje").html( texto ).css({"color": color, 'font-size':'200%' });
+    $(".mensaje").fadeOut(10000, function(){
+    $(this).html("");
+    $(this).fadeIn(3000);
+    });
+  }
 
       var limpiar_datos = function(){
       $("#editform .id").val("");
