@@ -92,7 +92,8 @@ Class User {
 
             $info=$query->fetch(PDO::FETCH_ASSOC);
 
-            if($pass === $info['pass']) {
+            //if($pass === $info['pass']) {
+            if(sha1($pass) === $info['pass']) {
 
 					$_SESSION['email']=$info['email'];
           $_SESSION['id']=$info['id'];

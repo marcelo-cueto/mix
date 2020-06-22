@@ -1,4 +1,6 @@
-<?php require_once 'header_web.php'; ?>
+<?php
+session_start();
+require_once 'header_web.php'; ?>
 
 <!--================ About section start =================-->
 <section class="d-lg-flex align-items-center section-margin--large">
