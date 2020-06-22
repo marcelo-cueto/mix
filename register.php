@@ -9,7 +9,7 @@
 
 
 				<div class="col-md-9 animate-box center" >
-					<h3>Registrese gratis</h3>
+					<h3>Registro de  profesional</h3>
 					<form id='register' action="#" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
 						<div class="row form-group">
 							<div class="col-md-6">
