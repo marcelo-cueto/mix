@@ -2,13 +2,12 @@
 
 include ('conect.php');
 
-$id=$_POST['id'];
 $name=$_POST['name'];
-$surname=$_POST['surname'];
+$surname=$_POST['apellido'];
 $email=$_POST['email'];
-$type=$_POST['type'];
-$opcion=$_POST['opcion'];
 $tel=$_POST['tel'];
+$type=0;
+$pass=$_POST['pass'];
 $profesion=$_POST['profesion'];
 if (isset($_POST['sueldos'])) {
   $sueldos='si';
@@ -20,10 +19,35 @@ if (isset($_POST['sociedad_pyme'])) {
 }else{
   $sp='no';
 }
-if (isset($_POST['monotributo_autonomos'])) {
+if (isset($_POST['contabilidad'])) {
+  $cb='si';
+}else{
+  $cb='no';
+}
+if (isset($_POST['monotributo'])) {
   $mn='si';
 }else{
   $mn='no';
+}
+if (isset($_POST['autonomos'])) {
+  $au='si';
+}else{
+  $au='no';
+}
+if (isset($_POST['certificaciones'])) {
+  $ce='si';
+}else{
+  $ce='no';
+}
+if (isset($_POST['gestion'])) {
+  $gs='si';
+}else{
+  $gs='no';
+}
+if (isset($_POST['judiciales'])) {
+  $jd='si';
+}else{
+  $jd='no';
 }
 if (isset($_POST['impuestos'])) {
   $impuestos='si';
@@ -31,8 +55,10 @@ if (isset($_POST['impuestos'])) {
   $impuestos='no';
 }
 $matricula=$_POST['matricula'];
+$otras=$_POST['otras'];
+$conocio=$_POST['conocio'];
+$comentario=$_POST['coment'];
 
-$pass=$_POST['pass'];
 function verify($resultado){
   if(!$resultado){
     $info=2;
@@ -54,8 +80,12 @@ $pass=sha1($pass);
 
 switch ($opcion) {
   case 0:
-  if( $name != "" && $surname != "" && $email != "" && $profesion != "" && $matricula != "" && ($sueldos != 'no' || $sp != 'no' || $mn != 'no' || $impuestos != 'no') ){
-  $query="UPDATE suscriptions SET name = '$name', surname= '$surname', email= '$email', type= '$type', pass='$pass',profesion='$profesion',sueldos='$sueldos',matricula='$matricula',sociedad_pyme='$sp',monotributo_autonomos='$mn',impuestos='$impuestos'WHERE suscriptions.id = '$id'";
+  if( $name != "" && $surname != "" && $email != "" && $profesion != ""  && $conocio!= "" &&
+  ($sueldos != 'no' || $sp != 'no' || $mn != 'no' || $impuestos != 'no' ||
+   $cb !='no' || $au != 'no' || $ce != 'no' || $gs != 'no'|| $jd != 'no') )
+  $query="UPDATE suscriptions SET name = '$name', surname= '$surname', email= '$email', type= '$type', pass='$pass',profesion='$profesion',sueldos='$sueldos',matricula='$matricula',sociedades='$sp',monotributo='$mn',impuestos='$impuestos',
+  autonomos='$au', judiciales='$jd',gestion='$gs', certificaciones='$ce', contabilidad='$cb', otras='$otras', recomendado='$conocio', comentario='$comentario'
+  WHERE suscriptions.id = '$id'";
   $resutltado=mysqli_query($conn, $query);
   verify($resutltado);
   close($conn);
@@ -66,13 +96,19 @@ switch ($opcion) {
   break;
 
   case 1:
-  if( $name != "" && $surname != "" && $email != "" && $profesion != "" && $matricula != "" && ($sueldos != 'no' || $sp != 'no' || $mn != 'no' || $impuestos != 'no') ){
+  if( $name != "" && $surname != "" && $email != "" && $profesion != ""  && $conocio!= "" &&
+  ($sueldos != 'no' || $sp != 'no' || $mn != 'no' || $impuestos != 'no' ||
+   $cb !='no' || $au != 'no' || $ce != 'no' || $gs != 'no'|| $jd != 'no') ){
       $existe = existe_usuario($email, $conn);
       if($existe>0){
         $info=3;
         echo json_encode($info);
       }else{
-        $query="INSERT INTO suscriptions (name, surname,tel, email, type, pass, profesion,sueldos,matricula,sociedad_pyme,monotributo_autonomos,impuestos) VALUES ('$name', '$surname','$tel', '$email', '$type', '$pass','$profesion','$sueldos','$matricula','$sp','$mn','$impuestos')";
+        $query="INSERT INTO suscriptions
+        (name, surname,tel, email, type, pass, profesion,sueldos,matricula,sociedades,monotributo,impuestos, autonomos, judiciales,gestion, certificaciones, contabilidad, otras, recomendado, comentario)
+         VALUES
+         ('$name', '$surname','$tel', '$email', '$type', '$pass','$profesion',
+            '$sueldos','$matricula','$sp','$mn','$impuestos', '$au', '$jd', '$gs', '$ce','$cb','$otras','$conocio', '$comentario')";
         $resutltado=mysqli_query($conn, $query);
         verify($resutltado);
         close($conn);

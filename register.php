@@ -131,8 +131,8 @@
 										</div>
 									</div>
 						<div class="form-group">
-							<input type="button" value="Enviar y suscribirme acá" class="btn btn-success">
-							<button type="submit" class="btn btn-primary" name="button">Enviar y solicitar contacto</button>
+							<input id='pago'type="button" value="Enviar y suscribirme acá" class="btn btn-success" >
+							<button type="submit" class="btn btn-primary" name="button" >Enviar y solicitar contacto</button>
 						</div>
 
 					</form>
@@ -156,16 +156,21 @@
 <?php require_once 'footer_web.php'; ?>
 <script type="text/javascript">
 $(document).ready(function() {
-	limpiar_datos()
-	guardar();
 
+	guardar();
+	crs();
 })
+var crs=function(){
+	$('#pago').on('click', function(){
+		mobbex();
+	})
+}
 
 var guardar=function(){
 	$('#register').on('submit', function(e){
 		e.preventDefault();
 		var frm=$('#register').serialize();
-	
+
 		$.ajax({
 			method:'POST',
 			url: 'ajax/register.php',
@@ -179,13 +184,18 @@ var guardar=function(){
 }
 var limpiar_datos = function(){
 
-	$("#register .name").val("");
-	$("#register .apellido").val("");
-	$("#register .apellido").val("");
-	$("#register .apellido").val("");
-	$("#register .email").val("");
-	$("#register .pass").val("");
-
+	$("#register #name").val("");
+	$("#register #apellido").val("");
+	
+	$("#register #tel").val("");
+	$("#register #email").val("");
+	$("#register #conocio").val("");
+	$("#register #exampleCheck1").prop("checked", false);
+	$("#register #coment").val("");
+	$("#register #pass").val("");
+	$("#register #passR").val("");
+	$("#register #matricula").val("");
+	$("#register #otras").val("");
 }
 var mostrar_mensaje = function(informacion){
 
@@ -216,5 +226,38 @@ var mostrar_mensaje = function(informacion){
 
 
 }
+var mobbex=function(){
+	var data = JSON.stringify({
+  "total": 500,
+  "currency": "ARS",
+  "type": "dynamic",
+  "total": "Suscripcion Enlace Profesional",
+	"description":"Suscripcion Enlace Profesional",
+	"interval": '1m',
+	"trial":'7d',
+	"limit":'6m',
+  "return_url": "register.php",
 
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://api.mobbex.com/p/subscriptions");
+xhr.setRequestHeader("x-api-key", "L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT");
+xhr.setRequestHeader("x-access-token", "d31f0721-2f85-44e7-bcc6-15e19d1a53cc");
+xhr.setRequestHeader("x-lang", "es");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("cache-control", "no-cache");
+
+
+xhr.send(data);
+console.log(xhr);
+}
 </script>

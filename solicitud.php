@@ -10,7 +10,7 @@
 
 				<div class="col-md-9 animate-box center" >
 					<h3>Busco Profesional</h3>
-					<form id='register' action="#" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
+					<form id='register' action="#" class='needs-validation' method='post' >
 						<div class="row form-group">
 							<div class="col-md-6">
 								<!-- <label for="fname">First Name</label> -->
@@ -21,7 +21,13 @@
 								<input type="text" id="apellido" class="form-control" name='apellido' placeholder="Ingrese su apellido aqui..." required>
 							</div>
 						</div>
+						<div class="row form-group">
 
+								<div class="col-md-12">
+									<!-- <label for="email">Email</label> -->
+									<input type="text" id="dir" name='dir'  class="form-control" placeholder="Ingrese su dirección aqui...">
+								</div>
+							</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<!-- <label for="email">Email</label> -->
@@ -51,22 +57,42 @@
 							<div class="col-md-6">
 
 								<div class="form-check">
-							    <input type="checkbox" class="form-check-input" id="exampleCheck1" name='sueldos' >
-							    <label class="form-check-label" for="sueldos"style="margin-left: 2%">SUELDOS</label>
-							  </div>
-								<div class="form-check">
-									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='sociedad_pyme' >
-									<label class="form-check-label" for="sociedad_pyme"style="margin-left: 2%">SOCIEDADES Y PYMES</label>
-								</div>
-								</div>
-								<div class="col-md-6">
-								<div class="form-check">
-									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='monotributo_autonomos' >
-									<label class="form-check-label" for="monotributo_autonomos"style="margin-left: 2%">MONOTRIBUTO Y AUTÓNOMOS</label>
+									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='sueldos' >
+									<label class="form-check-label" for="sueldos"style="margin-left: 2%">SUELDOS</label>
 								</div>
 								<div class="form-check">
 									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='impuestos' >
 									<label class="form-check-label" for="impuestos"style="margin-left: 2%">IMPUESTOS</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='sociedad_pyme' >
+									<label class="form-check-label" for="sociedad_pyme"style="margin-left: 2%">CONSTITUCION DE SOCIEDADES</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='contabilidad' >
+									<label class="form-check-label" for="sociedad_pyme"style="margin-left: 2%">CONTABILIDAD - BALANCES</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='certificaciones' >
+									<label class="form-check-label" for="sociedad_pyme"style="margin-left: 2%">CERTIFICACIONES</label>
+								</div>
+								</div>
+								<div class="col-md-6">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='monotributo' >
+									<label class="form-check-label" for="monotributo_autonomos"style="margin-left: 2%">MONOTRIBUTO</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='autonomos' >
+									<label class="form-check-label" for="monotributo_autonomos"style="margin-left: 2%">AUTONOMOS</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='gestion' >
+									<label class="form-check-label" for="impuestos"style="margin-left: 2%">GESTION</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1" name='judiciales' >
+									<label class="form-check-label" for="impuestos"style="margin-left: 2%">JUDICIALES Y PERICIAS</label>
 								</div>
 								</div>
 
@@ -75,7 +101,7 @@
 
 								<div class="col-md-12">
 									<!-- <label for="email">Email</label> -->
-									<textarea  name="text" rows="8" cols="80" placeholder="Deje su comentario aqui"></textarea>
+									<textarea id='coment' name="coment" rows="8" cols="80" placeholder="Deje su comentario aqui..."></textarea>
 								</div>
 							</div>
 						<div class="form-group">
@@ -115,7 +141,7 @@ var guardar=function(){
 
 		$.ajax({
 			method:'POST',
-			url: 'ajax/register.php',
+			url: 'ajax/search.php',
 			data: frm
 		}).done(function(info){
 
@@ -126,12 +152,14 @@ var guardar=function(){
 }
 var limpiar_datos = function(){
 
-	$("#register .name").val("");
-	$("#register .apellido").val("");
-	$("#register .apellido").val("");
-	$("#register .apellido").val("");
-	$("#register .email").val("");
-	$("#register .pass").val("");
+	$("#register #name").val("");
+	$("#register #apellido").val("");
+	$("#register #dir").val("");
+	$("#register #tel").val("");
+	$("#register #email").val("");
+	
+	$("#register #exampleCheck1").prop("checked", false);
+	$("#register #coment").val("");
 
 }
 var mostrar_mensaje = function(informacion){

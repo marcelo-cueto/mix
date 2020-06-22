@@ -40,25 +40,51 @@ include_once 'partials/head.php'; ?>
         <input type="tel" class='tel form-control' id='tel'name="tel" value="" >
 
         <label for="especializacion">Especialista en:</label>
+        <div class="row form-group">
+
+          <div class="col-md-6">
+
             <div class="form-check">
-
-
               <input type="checkbox" class="form-check-input" id="exampleCheck1" name='sueldos' >
               <label class="form-check-label" for="sueldos"style="margin-left: 2%">SUELDOS</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='sociedad_pyme' >
-              <label class="form-check-label" for="sociedad_pyme"style="margin-left: 2%">SOCIEDADES Y PYMES</label>
-            </div>
-
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='monotributo_autonomos' >
-              <label class="form-check-label" for="monotributo_autonomos"style="margin-left: 2%">MONOTRIBUTO Y AUTÓNOMOS</label>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1" name='impuestos' >
               <label class="form-check-label" for="impuestos"style="margin-left: 2%">IMPUESTOS</label>
             </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='sociedad_pyme' >
+              <label class="form-check-label" for="sociedad_pyme"style="margin-left: 2%">CONSTITUCION DE SOCIEDADES</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='contabilidad' >
+              <label class="form-check-label" for="sociedad_pyme"style="margin-left: 2%">CONTABILIDAD - BALANCES</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='certificaciones' >
+              <label class="form-check-label" for="sociedad_pyme"style="margin-left: 2%">CERTIFICACIONES</label>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='monotributo' >
+              <label class="form-check-label" for="monotributo_autonomos"style="margin-left: 2%">MONOTRIBUTO</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='autonomos' >
+              <label class="form-check-label" for="monotributo_autonomos"style="margin-left: 2%">AUTONOMOS</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='gestion' >
+              <label class="form-check-label" for="impuestos"style="margin-left: 2%">GESTION</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name='judiciales' >
+              <label class="form-check-label" for="impuestos"style="margin-left: 2%">JUDICIALES Y PERICIAS</label>
+            </div>
+            </div>
+
+        </div>
 
          <label for="email">Email</label>
          <input type="email" class='email form-control' name='email' value="" required>
@@ -111,10 +137,17 @@ include_once 'partials/head.php'; ?>
       <th>Telefono</th>
       <th>Profesion</th>
       <th>Sueldos</th>
-      <th>Sociedades y Pymes</th>
-      <th>monotributo y autonomos</th>
-      <th>Impuestos</th>
+      <th>Constitucion de sociedades</th>
+      <th>Monotributo </th>
+      <th>Autonomos</th>
+      <th>Contabilidad y balances</th>
+      <th>Gestion</th>
+      <th>Judiciales</th>
+      <th>Certificaciones</th>
+      <th>Otras</th>
       <th>Matricula</th>
+      <th>Recomendado Por</th>
+      <th>Comentario</th>
 
 
 
@@ -230,10 +263,17 @@ include_once 'partials/head.php'; ?>
         {'data':'tel'},
         {'data':'profesion'},
         {'data':'sueldos'},
-        {'data':'sociedad_pyme'},
-        {'data':'monotributo_autonomos'},
-        {'data':'impuestos'},
+        {'data':'sociedades'},
+        {'data':'monotributo'},
+        {'data':'autonomos'},
+        {'data':'contabilidad'},
+        {'data':'gestion'},
+        {'data':'judiciales'},
+        {'data':'certificaciones'},
+        {'data':'otras'},
         {'data':'matricula'},
+        {'data':'recomendado'},
+        {'data':'comentario'},
 
         {'defaultContent': "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	" }
       ],
