@@ -19,6 +19,7 @@ require_once 'header_web.php';
          <div class="col-md-12 col-md-push-1 animate-box" style='margin-top:1%'>
 
             <div class="col-md-9 animate-box center">
+               <br>
                <h3>Inicio de sesión</h3>
                <br>
                <?php if (isset($_SESSION['email'])) { ?>
@@ -42,6 +43,14 @@ require_once 'header_web.php';
                   <div class="form-group">
                      <input type="submit" value="Ingresar" class="btn btn-success">
                   </div>
+                  <div class="row form-group">
+                     <div class="col-md-6">
+                     </div>
+                  </div>
+                  <div class="row form-group">
+                     <div class="col-md-6">
+                     </div>
+                  </div>
 
                   </form>
 
@@ -56,3 +65,5 @@ require_once 'header_web.php';
 
       </div>
    </div>
+
+   <?php require_once 'footer_web.php'; ?>
