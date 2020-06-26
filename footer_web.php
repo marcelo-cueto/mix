@@ -4,10 +4,10 @@
         <div class="col-lg-12 col-sm-12 footer-social text-center">
             <h6>Seguinos en nuestras redes sociales</h6>
             <div class="col-lg-12 col-sm-12 footer-social text-center">
-                <a href="#"><i class="fab fa-linkedin" aria-hidden="true" style="font-size:32px;"></i></a>
-                <a href="#"><i class="fab fa-instagram" aria-hidden="true" style="font-size:32px;"></i></a>
-                <a href="#"><i class="fab fa-facebook" aria-hidden="true" style="font-size:32px;"></i></a>
-                <a href="#"><i class="fab fa-whatsapp" aria-hidden="true" style="font-size:32px;"></i></a>
+                <a href="#"><i class="fab fa-linkedin" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
+                <a href="#"><i class="fab fa-instagram" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
+                <a href="#"><i class="fab fa-facebook" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
+                <a href="#"><i class="fab fa-whatsapp" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
             </div>
 
         </div>

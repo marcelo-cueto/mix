@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 
@@ -11,16 +11,35 @@ include_once 'partials/head.php'; ?>
 <?php include_once 'partials/sidebar.php'; ?>
 
         <!-- Page Content  -->
-      <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Administrador</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
+      <div id="content" class="p-4 p-md-5 pt-5 flex">
+
+
+<div class="card-group">
+        <div class="card " style="width: 35rem; ">
+          <div class="card-body">
+            <h5 class="card-title">Suscriptore por Especialidad</h5>
+            <div class="card-body">
+              <div class="barsus"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card " style="width: 35rem; ">
+          <div class="card-body">
+            <h5 class="card-title">Busquedas por Especialidad</h5>
+            <div class="card-body">
+              <div class="barcli"></div>
+            </div>
+          </div>
+        </div>
+</div>
 		</div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+
   </body>
 </html>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.barsus').load('ajax/barsus.php');
+    $('.barcli').load('ajax/barcli.php');
+  })
+</script>

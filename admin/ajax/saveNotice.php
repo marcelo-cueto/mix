@@ -11,7 +11,7 @@ $date=$_POST['date'];
 $opcion=$_POST['opcion'];
 $autor=$_POST['autor'];
 if (!empty($_FILES)) {
-$fileName = time().'_'.$_FILES['img']['name'];
+$fileName = time().'_'.$id;
 
 $rutanueva='../images/principals/'.$fileName;
 

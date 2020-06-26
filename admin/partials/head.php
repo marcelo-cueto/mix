@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <script type="text/javascript"  src="js/jquery.min.js"></script>
     <script type="text/javascript"  src="js/jquery-1.12.3.js"></script>
+    
     <script src="js/bootstrap.min.js"></script>
+    <script  src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>

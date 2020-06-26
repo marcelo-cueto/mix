@@ -3,7 +3,7 @@ session_start();
 require_once 'header_web.php'; ?>
 
 <!--================ About section start =================-->
-<section class="d-lg-flex align-items-center section-margin--large">
+<section class="d-lg-flex align-items-center section-margin--small">
    <div class="about__videoWrapper">
       <div class="about__video">
          <div class="about__video-image">

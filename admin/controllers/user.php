@@ -1,5 +1,5 @@
 <?php
-require_once 'admin/controllers/conectPDO.php';
+require_once 'conectPDO.php';
 
 Class User {
   private $id;
@@ -142,7 +142,7 @@ Class User {
     public static function userById($id){
       global $conn;
 
-      $query = $conn->prepare("SELECT * FROM Users WHERE id = $id");
+      $query = $conn->prepare("SELECT * FROM users WHERE id = $id");
 
       $query->execute();
 

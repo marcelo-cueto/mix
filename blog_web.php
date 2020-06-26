@@ -25,9 +25,8 @@ $comments = comment::getAllComments(); ?>
                <div class="card card-blog">
                   <img class="card-img rounded-0" src=<?php echo "admin/images/principals/".$n->getImg(); ?> alt="">
                   <div class="card-blog__body">
-                     <h3><a href="#"><?php echo $n->getTitle(); ?></a></h3>
+                     <h3><a href="blog_details_web.php?nid=<?php echo $n->getId(); ?>"><?php echo $n->getTitle(); ?></a></h3>
                      <ul class="card-blog__info">
-                        <li><a href="#"><i class="ti-notepad"></i><?php echo $n->getDates(); ?></a></li>
                         <?php
                               $i = 0;
                               foreach ($comments as $c) {
@@ -39,7 +38,7 @@ $comments = comment::getAllComments(); ?>
                      <p><?php echo $n->getTexto(); ?></p>
                   </div>
                   <div class="card-blog__footer">
-                     <a href="blog_details_web.php?nid=<?php echo $n->getId(); ?>">Read More<i class="ti-arrow-right"></i></a>
+                     <a href="blog_details_web.php?nid=<?php echo $n->getId(); ?>">Leer mas<i class="ti-arrow-right"></i></a>
                   </div>
                   <div class="card-blog__footer">
                      <p> </p>
@@ -47,7 +46,7 @@ $comments = comment::getAllComments(); ?>
                </div>
             </div>
 
-            
+
          <?php } ?>
       </div>
    </div>

@@ -32,6 +32,13 @@
 
 								<div class="col-md-12">
 									<!-- <label for="email">Email</label> -->
+									<input type="text" id="dni" name='dni'  class="form-control" placeholder="Ingrese su DNI aqui...">
+								</div>
+							</div>
+						<div class="row form-group">
+
+								<div class="col-md-12">
+									<!-- <label for="email">Email</label> -->
 									<input type="tel" id="tel" name='tel'  class="form-control" placeholder="Ingrese su tefono aqui...">
 								</div>
 							</div>
@@ -127,12 +134,12 @@
 
 										<div class="col-md-12">
 											<!-- <label for="email">Email</label> -->
-											<textarea name="name" rows="8" cols="88	" placeholder="Comentarios"></textarea>
+											<textarea name="coment" class="form-control" rows="8" cols="88	" placeholder="Comentarios"></textarea>
 										</div>
 									</div>
 						<div class="form-group">
-							<input id='pago'type="button" value="Enviar y suscribirme acá" class="btn btn-success" >
-							<button type="submit" class="btn btn-primary" name="button" >Enviar y solicitar contacto</button>
+							<input id='pago'type="button" value="Enviar y suscribirme acá" class="button mt-xl-3" >
+							<button type="submit" class="button mt-xl-3" name="button" >Enviar y solicitar contacto</button>
 						</div>
 
 					</form>
@@ -157,36 +164,41 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	guardar();
+
 	crs();
 })
 var crs=function(){
-	$('#pago').on('click', function(){
-		mobbex();
-	})
-}
-
-var guardar=function(){
-	$('#register').on('submit', function(e){
+	$('#pago').on('click', function(e){
 		e.preventDefault();
 		var frm=$('#register').serialize();
-
+		console.log(frm);
 		$.ajax({
 			method:'POST',
-			url: 'ajax/register.php',
+			url: 'ajax/mobbex.php',
 			data: frm
 		}).done(function(info){
-
-			mostrar_mensaje(info);
-			limpiar_datos();
+			console.log(info);
+			if(info=='1'){
+				var frm=$('#register').serialize();
+				console.log(frm);
+				$.ajax({
+					method:'POST',
+					url: 'ajax/api.php',
+					data: frm
+				}).done(function(data){
+					console.log(data);
+				})
+			}
 		})
 	})
 }
+
+
 var limpiar_datos = function(){
 
 	$("#register #name").val("");
 	$("#register #apellido").val("");
-	
+
 	$("#register #tel").val("");
 	$("#register #email").val("");
 	$("#register #conocio").val("");

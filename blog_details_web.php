@@ -15,14 +15,14 @@ $user = User::userById($notice->getAutor());
 <?php require_once 'header_web.php'; ?>
 
 <!--================Blog Area =================-->
-<section class="blog_area single-post-area section-margin">
+<section class="blog_area single-post-area section-margin--small " >
    <div class="container">
       <div class="row">
-         <div class="col-lg-8 posts-list">
-            <div class="single-post row">
+         <div class="col-lg-12 posts-list">
+            <div class="single-post  row " style='margin-left:7%;' >
                <div class="col-lg-12">
                   <div class="feature-img">
-                     <img class="img-fluid" src="img/blog/feature-img1.jpg" alt="">
+                     <img class="img-fluid" src="admin/images/principals/<?php echo $notice->getImg();?>" alt="" style='width:80%;'>
                   </div>
                </div>
                <div class="col-lg-3  col-md-3">
@@ -78,11 +78,11 @@ $user = User::userById($notice->getAutor());
                   </div>
                </div>
                <?php } ?>
-               
+
 
             </div>
             <div class="comment-form">
-               <h4>Dejá tu comentario</h4>
+               <h4 style='color:#fff;'>Dejá tu comentario</h4>
                <form>
                   <div class="form-group">
                      <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">

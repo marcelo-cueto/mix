@@ -5,7 +5,7 @@ include_once 'partials/head.php';
 require_once 'controllers/Alert.php';
 require_once 'controllers/user.php';
 if ($_POST) {
-    user::Loger($_POST["email"], $_POST["pass"]);
+    user::loger($_POST["email"], $_POST["pass"]);
 }
 ?>
 <div class="container">
