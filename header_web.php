@@ -6,7 +6,8 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Enlace Profesional</title>
    <link rel="icon" href="img/Fevicon.png" type="image/png">
-
+   <script type="text/javascript"  src="admin/js/jquery.min.js"></script>
+   <script type="text/javascript"  src="admin/js/jquery-1.12.3.js"></script>
    <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
    <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
    <link rel="stylesheet" href="vendors/themify-icons/themify-icons.css">
@@ -49,7 +50,7 @@
                      <li class="nav-item submenu dropdown">
                         <a href="home_web.php" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Suscriptores</a>
                         <ul class="dropdown-menu">
-                           <?php if (!isset($_SESSION['email'])) { 
+                           <?php if (!isset($_SESSION['email'])) {
                               echo "
                               <li class='nav-item'><a class='nav-link' href='suscriptors_login_web.php'>Ingresar</a></li>
                               <li class='nav-item'><a class='nav-link' href='register.php'>Registrarme</a></li>

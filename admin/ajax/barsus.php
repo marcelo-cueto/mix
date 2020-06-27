@@ -82,15 +82,24 @@ mysqli_close($conn);
     var tge=<?php echo $gestion; ?>;
     var tju=<?php echo $judiciales; ?>;
     var tce=<?php echo $certificaciones; ?>;
+    var layout = {
+      autosize: false,
+      width: 400,
+      height: 400,
 
+
+      plot_bgcolor: '#fff'
+    };
     var data = [
             {
                 x: ['Sueldos', 'sociedades', 'monotibuto','impuestos','matricula','contabilidad','gestion', 'judiciales',' certificaciones'],
                 y: [tsu, tso, tmo,tim,tco,tge,tju,tce],
                 marker: {color: '#60E2D2'},
+
                 type: 'bar'
                     }
             ];
 
-    Plotly.newPlot('barsus', data);
+    Plotly.newPlot('barsus', data, layout);
+
 </script>

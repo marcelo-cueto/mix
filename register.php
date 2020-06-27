@@ -126,8 +126,17 @@
 							<div class="row form-group">
 
 									<div class="col-md-12">
-										<!-- <label for="email">Email</label> -->
-										<input type="text" id="conocio" name='conocio'  class="form-control" placeholder="Como nos conocio?" required >
+										<label for="conocio">Como nos conocio?</label>
+									<select id="conocio" name='conocio'  class="form-control" >
+
+										<option value="facebook">Facebook</option>
+										<option value="instagram">Instagram</option>
+										<option value="suscriptor">Conocido</option>
+										<option value="linkedin">Linkedin</option>
+										<option value="google">Google</option>
+										<option value="otras">Otras</option>
+									</select>
+
 									</div>
 								</div>
 								<div class="row form-group">
@@ -138,6 +147,8 @@
 										</div>
 									</div>
 						<div class="form-group">
+							<input type="hidden" name="latitud" id="latitud" value="">
+							<input type="hidden" name="longitud" id="longitud" value="">
 							<input id='pago'type="button" value="Enviar y suscribirme acá" class="button mt-xl-3" >
 							<button type="submit" class="button mt-xl-3" name="button" >Enviar y solicitar contacto</button>
 						</div>
@@ -167,6 +178,35 @@ $(document).ready(function() {
 
 	crs();
 })
+function geoposicionar(){
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(complete,errorPosicionar, {timeout:1000});
+    }
+}
+function errorPosicionar(error) {
+    switch(error.code)
+    {
+        case error.TIMEOUT:
+            mostrarMensaje('Request timeout');
+        break;
+        case error.POSITION_UNAVAILABLE:
+            mostrarMensaje('Tu posición no está disponible');
+        break;
+        case error.PERMISSION_DENIED:
+            mostrarMensaje('Tu navegador ha bloqueado la solicitud de geolocalización');
+        break;
+        case error.UNKNOWN_ERROR:
+            mostrarMensaje('Error desconocido');
+        break;
+    }
+}
+function complete(pos){
+	var lat= pos.coords.latitude;
+	var lon=pos.coords.longitude;
+    $('#latitud').val(lat);
+		$('#longitud').val(lon);
+}
 var crs=function(){
 	$('#pago').on('click', function(e){
 		e.preventDefault();

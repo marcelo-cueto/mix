@@ -19,7 +19,7 @@ include_once 'partials/head.php'; ?>
          <div class="form-row">
 
 
-         <input type="hidden" class='id' name='id' value="" >
+         <input type="hidden" id='id' name='id' value="" >
          <label for="title">Titulo</label>
          <input type="text" class='title form-control' name='title' value="">
 
@@ -54,7 +54,7 @@ include_once 'partials/head.php'; ?>
 
        </form>
        <form class="deleteform" action="" method="post"  style="align:center">
-         <input type="hidden" class='id' name='id' value="" >
+         <input type="hidden" class='id' id='id' name='id' value="" >
          <input type="hidden" class='opcion1' name="opcion" value="eliminar">
          <input id="elimiar" type="button" class="btn btn-danger" value="eliminar">
 
@@ -178,14 +178,14 @@ include_once 'partials/head.php'; ?>
 
   var eliminar=function(){
     $('#elimiar').on('click', function(e){
-      var id=$('#editform .id').val()
+      var id=$('#editform #id').val()
       console.log(id);
       $.ajax({
         method:'POST',
-        url: 'ajax/elimiar.php',
+        url: 'ajax/eliminarNoticia.php',
         data: {'id':id}
       }).done(function(info){
-
+        console.log(info);
         limpiar_datos();
         listar();
 
@@ -311,7 +311,7 @@ var mostrar_mensaje = function(informacion){
       $('#crear').hide();
       $('#elimiar').show();
       var form=$('.form').val(1)
-          id=$('.id').val(data.notice_id);
+          id=$('#id').val(data.notice_id);
           title=$('.title').val(data.titulo);
           text=$('.text').val(data.texto);
           date=$('#date').val(data.fecha);

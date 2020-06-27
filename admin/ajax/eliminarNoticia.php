@@ -2,25 +2,25 @@
 
 include ('conect.php');
 
-print_r($_POST);
+
 $id=$_POST['id'];
 
-$opcion=$_POST['opcion'];
-$info=[];
+
+
 
 
 
 
   $query="DELETE FROM notices WHERE id='$id'";
   $resutltado=mysqli_query($conn, $query);
-  verify($resultado);
+  verify($resutltado);
   close($conn);
 
 function verify($resultado){
   if(!$resultado){
-    $info['respuesta']='BIEN';
+    $info=2;
   }else{
-    $info['respuesta']='ERROR';
+    $info=1;
   }
   echo json_encode($info);
 }

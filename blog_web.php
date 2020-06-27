@@ -35,7 +35,10 @@ $comments = comment::getAllComments(); ?>
                               echo "<li><a href=''><i class='ti-themify-favicon'></i>$i comentarios</a></li>";
                         ?>
                      </ul>
-                     <p><?php echo $n->getTexto(); ?></p>
+                     <p><?php
+                      $a=$n->getTexto();
+                      $b=substr($a, 0, 140);
+                      echo $b; ?></p>
                   </div>
                   <div class="card-blog__footer">
                      <a href="blog_details_web.php?nid=<?php echo $n->getId(); ?>">Leer mas<i class="ti-arrow-right"></i></a>

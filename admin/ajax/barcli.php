@@ -70,7 +70,7 @@ mysqli_close($conn);
 <head>
                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
-<div id="barsus" >
+<div id="barcli" >
 </div>
 <script type="text/javascript">
     var tsu=<?php echo $sueldo; ?>;
@@ -82,15 +82,24 @@ mysqli_close($conn);
     var tge=<?php echo $gestion; ?>;
     var tju=<?php echo $judiciales; ?>;
     var tce=<?php echo $certificaciones; ?>;
+    var layout = {
+      autosize: false,
+      width: 400,
+      height: 400,
 
+
+      plot_bgcolor: '#fff'
+    };
     var data = [
             {
                 x: ['Sueldos', 'sociedades', 'monotibuto','impuestos','matricula','contabilidad','gestion', 'judiciales',' certificaciones'],
                 y: [tsu, tso, tmo,tim,tco,tge,tju,tce],
                 marker: {color: '#60E2D2'},
+
                 type: 'bar'
                     }
             ];
 
-    Plotly.newPlot('barsus', data);
+    Plotly.newPlot('barcli', data,layout);
+
 </script>
