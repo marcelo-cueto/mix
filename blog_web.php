@@ -27,6 +27,7 @@ $comments = comment::getAllComments(); ?>
                   <div class="card-blog__body">
                      <h3><a href="blog_details_web.php?nid=<?php echo $n->getId(); ?>"><?php echo $n->getTitle(); ?></a></h3>
                      <ul class="card-blog__info">
+                        <li><a href='#'><i class='ti-notepad'></i><?php echo $n->getDates(); ?></a></li>
                         <?php
                               $i = 0;
                               foreach ($comments as $c) {

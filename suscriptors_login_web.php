@@ -41,7 +41,8 @@ require_once 'header_web.php';
                   </div>
 
                   <div class="form-group">
-                     <input type="submit" value="Ingresar" class="btn btn-success">
+                  <button type="submit" class="button mt-xl-3" name="button" >Ingresar</button>
+                     
                   </div>
                   <div class="row form-group">
                      <div class="col-md-6">

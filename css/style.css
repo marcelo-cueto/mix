@@ -1060,7 +1060,26 @@ h3, .h3 {
    z-index: 1
 }
 
+.cta-wrapper2 {
+   background: url(../img/home/nos2.png) left center no-repeat;
+   background-size: cover;
+   position: relative;
+   z-index: 1
+}
+
 .cta-wrapper::after {
+   content: "";
+   display: block;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(1, 0, 9, 0.6);
+   z-index: -1
+}
+
+.cta-wrapper2::after {
    content: "";
    display: block;
    position: absolute;
@@ -2893,4 +2912,12 @@ h3, .h3 {
 
 .email-text {
    font-size: 20px
+}
+
+.separador {
+   margin-bottom: 100px
+}
+
+.separador2 {
+   margin-bottom: 200px
 }

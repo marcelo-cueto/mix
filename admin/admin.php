@@ -18,7 +18,7 @@ include_once 'partials/head.php'; ?>
 
 <div class="card-deck">
         <div class="card " >
-          <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Suscriptore por Especialidad</h5></div>
+          <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Suscriptores por Especialidad</h5></div>
           <div class="card-body" >
 
 

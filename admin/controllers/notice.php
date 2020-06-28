@@ -79,7 +79,7 @@ Class Notice {
    public static function getDefaultNotices() {
       global $conn;
       $notices = [];
-      $query = $conn->prepare("SELECT * FROM notices WHERE tipo = 0");
+      $query = $conn->prepare("SELECT * FROM notices WHERE tipo = 0  ORDER BY dates DESC");
       try {
          $query->execute();
          while ($info = $query->fetch(PDO::FETCH_ASSOC)){

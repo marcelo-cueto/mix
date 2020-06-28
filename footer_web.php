@@ -14,7 +14,7 @@
         <div class="col-lg-12 col-sm-12 footer-social text-center email-text">
             <p class="col-lg-12 col-sm-12 footer-text m-0 text-center">
                 <br>
-                enlaceprofesional@mail.com
+                info@enlaceprofesional.com.ar
             </p>
         </div>
 

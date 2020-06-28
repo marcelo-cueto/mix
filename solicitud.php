@@ -105,6 +105,7 @@
 								</div>
 							</div>
 						<div class="form-group">
+                     
 							<input type="submit" value="Registrarme" class="btn btn-primary">
 						</div>
 
