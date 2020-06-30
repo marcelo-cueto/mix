@@ -147,9 +147,9 @@ class Suscriptor
       $info = $query->fetch(PDO::FETCH_ASSOC);
 
       if (sha1($pass) === $info['pass']) {
-         $_SESSION['email'] = $info['email'];
-         $_SESSION['id'] = $info['id'];
-         setcookie("email", $_SESSION['email'], time() + 60 * 60 * 24 * 30);
+         $_SESSION['sus_email'] = $info['email'];
+         $_SESSION['sus_id'] = $info['id'];
+         setcookie("email", $_SESSION['sus_email'], time() + 60 * 60 * 24 * 30);
          header('Location: blog_web.php');
          exit();
       } else {
@@ -169,4 +169,51 @@ class Suscriptor
       header('Location: index.php');
       exit();
    }
+
+   /*
+   public static function userById($id){
+      global $conn;
+      $query = $conn->prepare("SELECT * FROM users WHERE id = $id");
+      $query->execute();
+      $info=$query->fetch(PDO::FETCH_ASSOC);
+      return $info;
+    } */
+
+    public static function existsByEmail($email){
+      global $conn;
+      $query = $conn->prepare("SELECT * FROM suscriptions WHERE email = '$email'");
+      $query->execute();
+      $info=$query->fetch(PDO::FETCH_ASSOC);
+      return $info;
+    }
+
+    public static function updateByEmail($email, $param1, $value1, $param2 = '', $value2 = '') {
+      global $conn;
+      $sql = "UPDATE suscriptions SET $param1 = '$value1' ";
+      if ($param2 != '' && $value2 != '') $sql .= ", $param2 = '$value2' ";
+      $sql .= "WHERE email = '$email'";
+      $query = $conn->prepare($sql);
+      $query->execute();
+      $info = $query->fetch();
+      return $info;
+    }
+
+    public static function sendPassEmail($email, $clave) {
+      $eol = PHP_EOL;
+      $asunto = 'Modificación de clave suscriptor';
+      $mensaje = 'Esta es la clave provisoria que deberá ingresar:' . $eol;
+      $mensaje .= $clave;
+      $header = 'From: no-responder@enlaceprofesional.com.ar' . $eol;
+      $header .= 'Reply-To: info@enlaceprofesional.com.ar' . $eol;
+      $header .= 'X-Mailer: PHP/' . phpversion();
+      /*
+      $mail = mail($email, $asunto, $mensaje, $header);
+      if ($mail) {
+         Alert::set_msg('Enviada con éxito', 'success');
+      } else {
+         Alert::set_msg('Disculpanos. No se pudo enviar', 'danger');
+      }
+      */
+      return;
+    }
 }

@@ -50,7 +50,7 @@
                      <li class="nav-item submenu dropdown">
                         <a href="home_web.php" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Suscriptores</a>
                         <ul class="dropdown-menu">
-                           <?php if (!isset($_SESSION['email'])) {
+                           <?php if (!isset($_SESSION['sus_email'])) {
                               echo "
                               <li class='nav-item'><a class='nav-link' href='suscriptors_login_web.php'>Ingresar</a></li>
                               <li class='nav-item'><a class='nav-link' href='register.php'>Registrarme</a></li>

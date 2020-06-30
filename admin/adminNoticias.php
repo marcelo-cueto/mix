@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['admin_email'])) {
     header('Location: adminLogin.php');
     exit();
 }
@@ -38,7 +38,7 @@ include_once 'partials/head.php'; ?>
 
 
          <input id='date'type="hidden" name="date" value="">
-         <input type="hidden" id='autor' name="autor" value=<?php echo $_SESSION['id'] ?>>
+         <input type="hidden" id='autor' name="autor" value=<?php echo $_SESSION['admin_id'] ?>>
          </div>
          <input id='opcion' type="hidden" name="opcion" value="">
          <input id="crear" type="button" class="btn btn-success" value="Crear" style="margin: 1%">

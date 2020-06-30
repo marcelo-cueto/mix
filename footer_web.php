@@ -7,7 +7,6 @@
                 <a href="#"><i class="fab fa-linkedin" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
                 <a href="#"><i class="fab fa-instagram" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
                 <a href="#"><i class="fab fa-facebook" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
-                <a href="#"><i class="fab fa-whatsapp" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
             </div>
 
         </div>

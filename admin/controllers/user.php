@@ -81,9 +81,11 @@ Class User {
   //**loguer**//
 		public static function loger($email, $pass)
 		{
+         /*
             if ($_REQUEST['csrf_token'] != $_SESSION['csrf_token']['token']) {
                 die('Acceso no permitido');
             }
+            */
             global $conn;
 
 			$query = $conn->prepare("SELECT * FROM users WHERE email = '$email'");
@@ -95,9 +97,9 @@ Class User {
             //if($pass === $info['pass']) {
             if(sha1($pass) === $info['pass']) {
 
-					$_SESSION['email']=$info['email'];
-          $_SESSION['id']=$info['id'];
-                    setcookie("email", $_SESSION['email'], time() + 60 * 60 * 24 * 30);
+					$_SESSION['admin_email']=$info['email'];
+          $_SESSION['admin_id']=$info['id'];
+                    setcookie("email", $_SESSION['admin_email'], time() + 60 * 60 * 24 * 30);
 
                     header('Location: admin.php');
                     exit();
@@ -149,5 +151,43 @@ Class User {
       $info=$query->fetch(PDO::FETCH_ASSOC);
 
       return $info;
+    }
+
+    public static function existsByEmail($email){
+      global $conn;
+      $query = $conn->prepare("SELECT * FROM users WHERE email = '$email'");
+      $query->execute();
+      $info=$query->fetch(PDO::FETCH_ASSOC);
+      return $info;
+    }
+
+    public static function updateByEmail($email, $param1, $value1, $param2 = '', $value2 = '') {
+      global $conn;
+      $sql = "UPDATE users SET $param1 = '$value1' ";
+      if ($param2 != '' && $value2 != '') $sql .= ", $param2 = '$value2' ";
+      $sql .= "WHERE email = '$email'";
+      $query = $conn->prepare($sql);
+      $query->execute();
+      $info = $query->fetch();
+      return $info;
+    }
+
+    public static function sendPassEmail($email, $clave) {
+      $eol = PHP_EOL;
+      $asunto = 'Modificación de clave administrador';
+      $mensaje = 'Esta es la clave provisoria que deberá ingresar:' . $eol;
+      $mensaje .= $clave;
+      $header = 'From: no-responder@enlaceprofesional.com.ar' . $eol;
+      $header .= 'Reply-To: info@enlaceprofesional.com.ar' . $eol;
+      $header .= 'X-Mailer: PHP/' . phpversion();
+      /*
+      $mail = mail($email, $asunto, $mensaje, $header);
+      if ($mail) {
+         Alert::set_msg('Enviada con éxito', 'success');
+      } else {
+         Alert::set_msg('Disculpanos. No se pudo enviar', 'danger');
+      }
+      */
+      return;
     }
 }
