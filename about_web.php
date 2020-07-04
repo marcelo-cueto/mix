@@ -11,7 +11,6 @@ require_once 'header_web.php'; ?>
         <h2>Calidad y Ética Profesional</h2>
         <p>Somos un equipo de especialistas que nos orientamos a brindar la mejor solucion
             a cada tipo de cliente sobre la base de la ética, el prestigio y la seriedad.</p>
-            <a class="button mt-xl-3" href="solicitud.php">Conocé Más</a>
       </div>
     </div>
   </section>

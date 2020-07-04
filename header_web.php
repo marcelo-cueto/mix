@@ -46,9 +46,10 @@
                   <ul class="nav navbar-nav menu_nav justify-content-end">
                      <li class="nav-item"><a class="nav-link" href="home_web.php">Home</a></li>
                      <li class="nav-item"><a class="nav-link" href="about_web.php">Nosotros</a></li>
-                     <li class="nav-item"><a class="nav-link" href="blog_web.php">Noticias</a>
+                     <li class="nav-item"><a class="nav-link" href="blog_web.php">Noticias</a></li>
+                     <li class="nav-item"><a class="nav-link" href="solicitud.php">Busco Profesional</a></li>
                      <li class="nav-item submenu dropdown">
-                        <a href="home_web.php" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Suscriptores</a>
+                        <a href="home_web.php" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Soy Profesional</a>
                         <ul class="dropdown-menu">
                            <?php if (!isset($_SESSION['sus_email'])) {
                               echo "
