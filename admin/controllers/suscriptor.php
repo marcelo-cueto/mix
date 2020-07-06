@@ -50,89 +50,215 @@ class Suscriptor
       if (isset($data['comentario'])) $this->comentario = $data['comentario'];
    }
 
-   public function getId() { return $this->id; }
+   public function getId()
+   {
+      return $this->id;
+   }
 
-   public function getName() { return $this->name; }
+   public function getName()
+   {
+      return $this->name;
+   }
 
-   public function getSurname() { return $this->surname; }
+   public function getSurname()
+   {
+      return $this->surname;
+   }
 
-   public function getEmail() { return $this->email; }
+   public function getEmail()
+   {
+      return $this->email;
+   }
 
-   public function getType() { return $this->type; }
+   public function getType()
+   {
+      return $this->type;
+   }
 
-   public function getPass() { return $this->pass; }
+   public function getPass()
+   {
+      return $this->pass;
+   }
 
-   public function getTel() { return $this->tel; }
+   public function getTel()
+   {
+      return $this->tel;
+   }
 
-   public function getProfesion() { return $this->profesion; }
+   public function getProfesion()
+   {
+      return $this->profesion;
+   }
 
-   public function getSueldos() { return $this->sueldos; }
+   public function getSueldos()
+   {
+      return $this->sueldos;
+   }
 
-   public function getSociedades() { return $this->sociedades; }
+   public function getSociedades()
+   {
+      return $this->sociedades;
+   }
 
-   public function getMonotributo() { return $this->monotributo; }
+   public function getMonotributo()
+   {
+      return $this->monotributo;
+   }
 
-   public function getImpuestos() { return $this->impuestos; }
+   public function getImpuestos()
+   {
+      return $this->impuestos;
+   }
 
-   public function getMatricula() { return $this->matricula; }
+   public function getMatricula()
+   {
+      return $this->matricula;
+   }
 
-   public function getAutonomos() { return $this->autonomos; }
+   public function getAutonomos()
+   {
+      return $this->autonomos;
+   }
 
-   public function getContabilidad() { return $this->contabilidad; }
+   public function getContabilidad()
+   {
+      return $this->contabilidad;
+   }
 
-   public function getGestion() { return $this->gestion; }
+   public function getGestion()
+   {
+      return $this->gestion;
+   }
 
-   public function getJudiciales() { return $this->judiciales; }
+   public function getJudiciales()
+   {
+      return $this->judiciales;
+   }
 
-   public function getCertificaciones() { return $this->certificaciones; }
+   public function getCertificaciones()
+   {
+      return $this->certificaciones;
+   }
 
-   public function getOtras() { return $this->otras; }
+   public function getOtras()
+   {
+      return $this->otras;
+   }
 
-   public function getRecomendado() { return $this->recomendado; }
+   public function getRecomendado()
+   {
+      return $this->recomendado;
+   }
 
-   public function getComentario() { return $this->comentario; }
+   public function getComentario()
+   {
+      return $this->comentario;
+   }
 
-   public function setId($id) { $this->id = $id; }
+   public function setId($id)
+   {
+      $this->id = $id;
+   }
 
-   public function setName($name) { $this->name = $name; }
+   public function setName($name)
+   {
+      $this->name = $name;
+   }
 
-   public function setSurname($surname) { $this->surname = $surname; }
+   public function setSurname($surname)
+   {
+      $this->surname = $surname;
+   }
 
-   public function setEmail($email) { $this->email = $email; }
+   public function setEmail($email)
+   {
+      $this->email = $email;
+   }
 
-   public function setType($type) { $this->type = $type; }
+   public function setType($type)
+   {
+      $this->type = $type;
+   }
 
-   public function setPass($pass) { $this->pass = $pass; }
+   public function setPass($pass)
+   {
+      $this->pass = $pass;
+   }
 
-   public function setTel($tel) { $this->tel = $tel; }
+   public function setTel($tel)
+   {
+      $this->tel = $tel;
+   }
 
-   public function setProfesion($profesion) { $this->profesion = $profesion; }
+   public function setProfesion($profesion)
+   {
+      $this->profesion = $profesion;
+   }
 
-   public function setSueldos($sueldos) { $this->sueldos = $sueldos; }
+   public function setSueldos($sueldos)
+   {
+      $this->sueldos = $sueldos;
+   }
 
-   public function setSociedades($sociedades) { $this->sociedades = $sociedades; }
+   public function setSociedades($sociedades)
+   {
+      $this->sociedades = $sociedades;
+   }
 
-   public function setMonotributo($monotributo) { $this->monotributo = $monotributo; }
+   public function setMonotributo($monotributo)
+   {
+      $this->monotributo = $monotributo;
+   }
 
-   public function setImpuestos($impuestos) { $this->impuestos = $impuestos; }
+   public function setImpuestos($impuestos)
+   {
+      $this->impuestos = $impuestos;
+   }
 
-   public function setMatricula($matricula) { $this->matricula = $matricula; }
+   public function setMatricula($matricula)
+   {
+      $this->matricula = $matricula;
+   }
 
-   public function setAutonomos($autonomos) { $this->autonomos = $autonomos; }
+   public function setAutonomos($autonomos)
+   {
+      $this->autonomos = $autonomos;
+   }
 
-   public function setContabilidad($contabilidad) { $this->contabilidad = $contabilidad; }
+   public function setContabilidad($contabilidad)
+   {
+      $this->contabilidad = $contabilidad;
+   }
 
-   public function setGestion($gestion) { $this->gestion = $gestion; }
+   public function setGestion($gestion)
+   {
+      $this->gestion = $gestion;
+   }
 
-   public function setJudiciales($judiciales) { $this->judiciales = $judiciales; }
+   public function setJudiciales($judiciales)
+   {
+      $this->judiciales = $judiciales;
+   }
 
-   public function setCertificaciones($certificaciones) { $this->certificaciones = $certificaciones; }
+   public function setCertificaciones($certificaciones)
+   {
+      $this->certificaciones = $certificaciones;
+   }
 
-   public function setOtras($otras) { $this->otras = $otras; }
+   public function setOtras($otras)
+   {
+      $this->otras = $otras;
+   }
 
-   public function setRecomendado($recomendado) { $this->recomendado = $recomendado; }
+   public function setRecomendado($recomendado)
+   {
+      $this->recomendado = $recomendado;
+   }
 
-   public function setComentario($comentario) { $this->comentario = $comentario; }
+   public function setComentario($comentario)
+   {
+      $this->comentario = $comentario;
+   }
 
    public static function loger($email, $pass)
    {
@@ -142,9 +268,14 @@ class Suscriptor
       }
       */
       global $conn;
-      $query = $conn->prepare("SELECT * FROM suscriptions WHERE email = '$email'");
-      $query->execute();
-      $info = $query->fetch(PDO::FETCH_ASSOC);
+      try {
+         $query = $conn->prepare("SELECT * FROM suscriptions WHERE email = :email");
+         $query->bindValue(':email', $email, PDO::PARAM_STR);
+         $query->execute();
+         $info = $query->fetch(PDO::FETCH_ASSOC);
+      } catch (PDOException $e) {
+         return $e->getMessage();
+      }
 
       if (sha1($pass) === $info['pass']) {
          $_SESSION['sus_email'] = $info['email'];
@@ -165,40 +296,44 @@ class Suscriptor
       session_destroy();
       session_write_close();
       setcookie(session_name(), '', 0, '/');
-
       header('Location: index.php');
       exit();
    }
 
-   /*
-   public static function userById($id){
+   public static function existsByEmail($email)
+   {
       global $conn;
-      $query = $conn->prepare("SELECT * FROM users WHERE id = $id");
-      $query->execute();
-      $info=$query->fetch(PDO::FETCH_ASSOC);
-      return $info;
-    } */
+      try {
+         $query = $conn->prepare("SELECT * FROM suscriptions WHERE email = :email");
+         $query->bindValue(':email', $email, PDO::PARAM_STR);
+         $query->execute();
+         $info = $query->fetch(PDO::FETCH_ASSOC);
+         return $info;
+      } catch (PDOException $e) {
+         return $e->getMessage();
+      }
+   }
 
-    public static function existsByEmail($email){
+   public static function updateByEmail($email, $param1, $value1, $param2 = '', $value2 = '')
+   {
       global $conn;
-      $query = $conn->prepare("SELECT * FROM suscriptions WHERE email = '$email'");
-      $query->execute();
-      $info=$query->fetch(PDO::FETCH_ASSOC);
-      return $info;
-    }
+      try {
+         $sql = "UPDATE suscriptions SET $param1 = :value1 ";
+         if ($param2 != '' && $value2 != '') $sql .= ", $param2 = :value2 ";
+         $sql .= "WHERE email = :email";
+         $query = $conn->prepare($sql);
+         $query->bindValue(':value1', $value1);
+         if ($param2 != '' && $value2 != '') $query->bindValue(':value2', $value2);
+         $query->bindValue(':email', $email, PDO::PARAM_STR);
+         $query->execute();
+         return;
+      } catch (PDOException $e) {
+         return $e->getMessage();
+      }
+   }
 
-    public static function updateByEmail($email, $param1, $value1, $param2 = '', $value2 = '') {
-      global $conn;
-      $sql = "UPDATE suscriptions SET $param1 = '$value1' ";
-      if ($param2 != '' && $value2 != '') $sql .= ", $param2 = '$value2' ";
-      $sql .= "WHERE email = '$email'";
-      $query = $conn->prepare($sql);
-      $query->execute();
-      $info = $query->fetch();
-      return $info;
-    }
-
-    public static function sendPassEmail($email, $clave) {
+   public static function sendPassEmail($email, $clave)
+   {
       $eol = PHP_EOL;
       $asunto = 'Modificación de clave suscriptor';
       $mensaje = 'Esta es la clave provisoria que deberá ingresar:' . $eol;
@@ -215,5 +350,5 @@ class Suscriptor
       }
       */
       return;
-    }
+   }
 }

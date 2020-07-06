@@ -3,11 +3,7 @@ session_start();
 include_once 'partials/head.php';
 require_once 'controllers/Alert.php';
 require_once 'controllers/user.php';
-/*
-if ($_POST) {
-   user::loger($_POST["email"], $_POST["pass"]);
-}
-*/
+
 if (isset($_POST['email']) && isset($_POST['pass'])) {
    $user = user::existsByEmail($_POST['email']);
    if ($user['recupera_pass'] != 1) {

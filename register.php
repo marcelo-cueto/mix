@@ -10,7 +10,7 @@
 
 				<div class="col-md-9 animate-box center" >
 					<h3>Registro de  profesional</h3>
-					<form id='register' action="#" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
+					<form id='register' action="" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
 						<div class="row form-group">
 							<div class="col-md-6">
 								<!-- <label for="fname">First Name</label> -->
@@ -214,7 +214,7 @@ var crs=function(){
 		console.log(frm);
 		$.ajax({
 			method:'POST',
-			url: 'ajax/mobbex.php',
+			url: 'ajax/api.php',
 			data: frm
 		}).done(function(info){
 			console.log(info);

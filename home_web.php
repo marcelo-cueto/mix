@@ -1,5 +1,6 @@
 <?php session_start();
-require_once 'header_web.php'; ?>
+require_once 'header_web.php'; 
+?>
 
 <!--================Banner carrusel =================-->
 <section>
