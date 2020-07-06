@@ -109,7 +109,7 @@ class User
       global $conn;
       try {
          $query = $conn->prepare("SELECT * FROM users WHERE email = :email");
-         $query->bindValue(':email', $email, PDO::PARAM_STR);
+         $query->bindValue(':email', "$email", PDO::PARAM_STR);
          $query->execute();
          $info = $query->fetch(PDO::FETCH_ASSOC);
       } catch (PDOException $e) {
@@ -150,7 +150,7 @@ class User
          return $info;
       } catch (PDOException $e) {
          return $e->getMessage();
-      }  
+      }
    }
 
    //**Buscar Usuario por id**//

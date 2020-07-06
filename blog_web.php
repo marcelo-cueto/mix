@@ -1,8 +1,9 @@
 <?php session_start();
+require_once 'ajax/countnot.php';
 require_once 'admin/controllers/notice.php';
 require_once 'admin/controllers/comment.php';
 
-if (!isset($_SESSION['sus_email'])) {
+if (!isset($_SESSION['email'])) {
    $notices = notice::getDefaultNotices();
 } else {
    $notices = notice::getAllNotices();

@@ -4,7 +4,7 @@ require_once 'header_web.php'; ?>
 
 <div class="separador"></div>
 
-  <!--================ Cta section start =================-->  
+  <!--================ Cta section start =================-->
   <section class="section-padding--smaller cta-wrapper">
     <div class="container">
       <div class="cta__content text-center">
@@ -14,11 +14,11 @@ require_once 'header_web.php'; ?>
       </div>
     </div>
   </section>
-  <!--================ Cta section end =================-->  
+  <!--================ Cta section end =================-->
 
   <div class="separador2"></div>
 
-    <!--================ Cta section start =================-->  
+    <!--================ Cta section start =================-->
     <section class="section-padding--smaller cta-wrapper2">
     <div class="container">
       <div class="cta__content text-center">
@@ -30,7 +30,7 @@ require_once 'header_web.php'; ?>
       </div>
     </div>
   </section>
-  <!--================ Cta section end =================-->  
-  
+  <!--================ Cta section end =================-->
+
 
 <?php require_once 'footer_web.php'; ?>

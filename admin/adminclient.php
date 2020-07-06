@@ -39,7 +39,7 @@ include_once 'partials/head.php'; ?>
       <th>Gestion</th>
       <th>Judiciales</th>
       <th>Certificaciones</th>
-      
+
       <th>Comentario</th>
 
 

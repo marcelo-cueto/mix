@@ -7,6 +7,7 @@
                 <a href="#"><i class="fab fa-linkedin" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
                 <a href="#"><i class="fab fa-instagram" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
                 <a href="#"><i class="fab fa-facebook" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
+
             </div>
 
         </div>
@@ -31,6 +32,24 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('#not').on('click',function(){
+
+        console.log('algo');
+        $.ajax({
+          url : "ajax/clicknot.php",
+          method: "POST", //o GET, la diferencia es que se vean los datos o no en el enlace
+          data : {'where':'not'}
+        }).done(function(data){
+          
+        })
+      });
+      })
+
+
+
+    </script>
 </footer>
 <!-- ================ End footer Area ================= -->
 

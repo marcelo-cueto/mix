@@ -118,4 +118,48 @@ Class Notice {
          return $e->getMessage();
       }
    }
+   public static function banner() {
+      global $conn;
+      $query = $conn->prepare("SELECT * FROM banner WHERE activa = '1' ORDER BY  orden");
+      try {
+         $query->execute();
+         $info = $query->fetchAll(PDO::FETCH_ASSOC);
+
+         return $info;
+      } catch(PDOException $e){
+         return $e->getMessage();
+      }
+   }
+   public static function place($posicion) {
+      switch ($posicion) {
+        case '0':
+          return 'First slide';
+          break;
+        case '1':
+          return 'Second slide';
+          break;
+        case '2':
+          return 'Third slide';
+          break;
+        case '3':
+          return 'Fourth slide';
+          break;
+        case '4':
+          return 'Fifth slide';
+          break;
+        case '5':
+          return 'Sixth slide';
+          break;
+        case '6':
+          return 'Seventh slide';
+          break;
+        case '7':
+          return 'Eighth slide';
+          break;
+        case '8':
+          return 'Nineth slide';
+          break;
+
+      }
+   }
 }

@@ -10,7 +10,7 @@
 
 				<div class="col-md-9 animate-box center" >
 					<h3>Registro de  profesional</h3>
-					<form id='register' action="" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
+					<form id='register' action="#" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
 						<div class="row form-group">
 							<div class="col-md-6">
 								<!-- <label for="fname">First Name</label> -->
@@ -150,7 +150,7 @@
 							<input type="hidden" name="latitud" id="latitud" value="">
 							<input type="hidden" name="longitud" id="longitud" value="">
 							<input id='pago'type="button" value="Enviar y suscribirme acá" class="button mt-xl-3" >
-							<button type="submit" class="button mt-xl-3" name="button" >Enviar y solicitar contacto</button>
+							<button type="button" class="button mt-xl-3" name="button" >Enviar y solicitar contacto</button>
 						</div>
 
 					</form>
@@ -175,8 +175,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+geoposicionar();
+crs();
 
-	crs();
 })
 function geoposicionar(){
     if(navigator.geolocation){
@@ -208,28 +209,39 @@ function complete(pos){
 		$('#longitud').val(lon);
 }
 var crs=function(){
-	$('#pago').on('click', function(e){
-		e.preventDefault();
-		var frm=$('#register').serialize();
-		console.log(frm);
-		$.ajax({
-			method:'POST',
-			url: 'ajax/api.php',
-			data: frm
-		}).done(function(info){
-			console.log(info);
-			if(info=='1'){
+	$('#pago').on('click', function(){
+
+
+			$.ajax({
+				url : "ajax/clicknot.php",
+				method: "POST", //o GET, la diferencia es que se vean los datos o no en el enlace
+				data : {'where':'sus'},
+			}).done(function(info){
+				console.log(info);
 				var frm=$('#register').serialize();
 				console.log(frm);
 				$.ajax({
 					method:'POST',
-					url: 'ajax/api.php',
+					url: 'ajax/mobbex.php',
 					data: frm
-				}).done(function(data){
-					console.log(data);
+				}).done(function(info){
+					console.log(info);
+					if(info=='1'){
+						var frm=$('#register').serialize();
+						console.log(frm);
+						$.ajax({
+							method:'POST',
+							url: 'ajax/api.php',
+							data: frm
+						}).done(function(data){
+							console.log(data);
+						})
+					}
 				})
-			}
-		})
+			})
+
+
+
 	})
 }
 

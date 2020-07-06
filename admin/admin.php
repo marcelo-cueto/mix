@@ -15,8 +15,50 @@ include_once 'partials/head.php'; ?>
         <div class="d-flex">
 
         </div>
+        <div class="card-deck" style='margin-bottom:1%;'>
+          <div class="card " >
+            <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Visitas Home</h5></div>
+            <div class="card-body" >
 
-<div class="card-deck">
+
+
+                <div class="viho"></div>
+
+            </div>
+          </div>
+          <div class="card " >
+            <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Visitas Noticias</h5></div>
+            <div class="card-body" >
+
+
+
+                <div class="vino"></div>
+
+            </div>
+          </div>
+          <div class="card " >
+            <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Clicks Profesionales</h5></div>
+            <div class="card-body" >
+
+
+
+                <div class="clpr"></div>
+
+            </div>
+          </div>
+          <div class="card " >
+            <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Clicks Clientes</h5></div>
+            <div class="card-body" >
+
+
+
+                <div class="clcl"></div>
+
+            </div>
+          </div>
+        </div>
+
+<div class="card-deck" style='margin-bottom:1%;'>
         <div class="card " >
           <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Suscriptores por Especialidad</h5></div>
           <div class="card-body" >
@@ -39,7 +81,7 @@ include_once 'partials/head.php'; ?>
 
 
 </div>
-<div class="card-deck">
+<div class="card-deck" style='margin-bottom:1%;'>
 
 
         <div class="card " >
@@ -53,7 +95,7 @@ include_once 'partials/head.php'; ?>
           </div>
         </div>
         <div class="card " >
-          <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Como conocieron</h5></div>
+          <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Noticias Publicadas</h5></div>
 
 
 
@@ -63,6 +105,21 @@ include_once 'partials/head.php'; ?>
           </div>
         </div>
   </div>
+  <div class="card-deck">
+
+
+          <div class="card " >
+            <div class="card-header" style='background-color:#60E2D2;'><h5 class="card-title">Visitas a Noticias por Día</h5></div>
+
+
+
+              <div id='tvn' class="card-body">
+
+
+            </div>
+          </div>
+
+    </div>
 </div>
 
 		</div>
@@ -72,11 +129,45 @@ include_once 'partials/head.php'; ?>
 </html>
 <script type="text/javascript">
   $(document).ready(function(){
+    viho();
+    vino();
+    clpr();
+
     $('.barsus').load('ajax/barsus.php');
     $('.barcli').load('ajax/barcli.php');
+    $('#tvn').load('ajax/tvn.php');
+    $('#scutter').load('ajax/timenote.php');
     pie();
-    scutter();
+
+
   })
+  var clpr=function(){
+    $.ajax({
+      method:'POST',
+      url:'ajax/clpr.php',
+    }).done(function(data){
+      console.log(data);
+      $('.clpr').text(data).css({ 'font-size': '200%'});
+    })
+  }
+  var vino=function(){
+    $.ajax({
+      method:'POST',
+      url:'ajax/vino.php',
+    }).done(function(data){
+      console.log(data);
+      $('.vino').text(data).css({ 'font-size': '200%'});
+    })
+  }
+  var viho=function(){
+    $.ajax({
+      method:'POST',
+      url:'ajax/viho.php',
+    }).done(function(data){
+      console.log(data);
+      $('.viho').text(data).css({ 'font-size': '200%'});
+    })
+  }
   var pie=function(){
     $.ajax({
       method:'POST',
@@ -107,42 +198,5 @@ include_once 'partials/head.php'; ?>
 
     })
   }
-  var scutter=function(){
-    $.ajax({
-      method:'POST',
-      url: 'ajax/timenote.php',
 
-    }).done(function(info){
-
-      var b= JSON.parse(info);
-      var layout = {
-        autosize: false,
-        width: 400,
-        height: 400,
-
-
-        plot_bgcolor: '#fff'
-      };
-      var va=[];
-      var la=[];
-      for (var i = 0; i < b['data'].length; i++) {
-
-        va.push(b['data'][i]['COUNT(*)']);
-        la.push(b['data'][i]['dates']);
-
-      }
-
-      var data = [{
-              values: va,
-              labels: la,
-              type: 'scatter'
-            }];
-
-
-
-      Plotly.newPlot('scutter', data, layout);
-
-
-    })
-  }
 </script>

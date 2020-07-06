@@ -11,35 +11,40 @@ include_once 'partials/head.php'; ?>
 
 <div id="content" class="p-4 p-md-5 pt-5" type='hidden'>
   <div class="d-flex">
-    <h2 class="mb-4" style="width:80%">Noticias</h2>
+    <h2 class="mb-4" style="width:80%">Banner</h2>
     <button type='button' id='' class='add btn btn-success float-right'  ><i class="fas fa-plus"></i></button>
   </div>
   <div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar" >
-       <h2 class="mb-4">Editar Noticias</h2>
+       <h2 class="mb-4">Editar Banner</h2>
        <form id="editform" action="" enctype="multipart/form-data" method="post" class="col-sm-12 col-md-12 col-lg-12">
+         <label for="link">Ingrese el Link</label>
+         <input type="text" name="link" class="link form-control" value="">
          <div class="form-row">
 
 
          <input type="hidden" id='id' name='id' value="" >
-         <label for="title">Titulo</label>
-         <input type="text" class='title form-control' name='title' value="">
-
-         <textarea id='text'name="text" class='text form-control'rows="12" style='width:80%;'></textarea>
 
 
-
-         <input type="file" class='img form-control' id='img' name='img' value="" >
-         <label for="type">Tipo de Noticia</label>
+         <label for="type">Posicion de la Imagen</label>
           <select class="type form-control" name="type">
-            <option value=0>Basico</option>
-            <option value=1>Pago</option>
+            <option value=0>Primera</option>
+            <option value=1>Segunda</option>
+            <option value=2>Tercera</option>
+            <option value=3>Cuatra</option>
+            <option value=4>Quinta</option>
+            <option value=5>Sexta</option>
+            <option value=6>Septima</option>
+            <option value=7>Octava</option>
+            <option value=8>Novena</option>
           </select>
-         <div class="">
+             <input type="file" class='img form-control' id='img' name='img' value="" >
+         <div class="form-control">
 
 
+           <label for="activa">Activar/Desactivar</label>
+           <input type="checkbox" class='activa'name='activa' checked data-toggle="toggle" data-size="sm">
 
-         <input id='date'type="hidden" name="date" value="">
-         <input type="hidden" id='autor' name="autor" value=<?php echo $_SESSION['id'] ?>>
+
          </div>
          <input id='opcion' type="hidden" name="opcion" value="">
          <input id="crear" type="button" class="btn btn-success" value="Crear" style="margin: 1%">
@@ -74,9 +79,9 @@ include_once 'partials/head.php'; ?>
 
 
     <tr>
-      <th>Titulo</th>
-      <th>Autor</th>
-      <th>Fecha de creación</th>
+      <th>Imagen</th>
+      <th>Orden</th>
+      <th>Activa/Inactiva</th>
       <th></th>
     </tr>
     </thead>
@@ -107,7 +112,7 @@ include_once 'partials/head.php'; ?>
 <!--Librerias para botones de exportación-->
 <script src="js/buttons.html5.min.js"></script>
 
-
+<img src="../img/" alt="">
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -149,22 +154,16 @@ include_once 'partials/head.php'; ?>
   var guardar=function(){
     $('#editform').on('submit', function(e){
       e.preventDefault();
-
       var frm= new FormData();
-      frm.append('title', $('.title').val());
-      frm.append('text', $('.text').val());
+      frm.append('link', $('.link').val());
       frm.append('type', $('.type').val());
-      frm.append('date', $('#date').val());
-      frm.append('autor', $('#autor').val());
+      frm.append('activa', $('.activa').val());
       frm.append('opcion', $('#opcion').val());
       frm.append('img',  $('#img')[0].files[0]);
-
-
-
       console.log(frm);
       $.ajax({
         method:'POST',
-        url: 'ajax/saveNotice.php',
+        url: 'ajax/savebanner.php',
         data: frm,
         contentType: false,
         processData: false,
@@ -183,7 +182,7 @@ include_once 'partials/head.php'; ?>
       console.log(id);
       $.ajax({
         method:'POST',
-        url: 'ajax/eliminarNoticia.php',
+        url: 'ajax/eliminarBanner.php',
         data: {'id':id}
       }).done(function(info){
         console.log(info);
@@ -200,12 +199,12 @@ include_once 'partials/head.php'; ?>
       'destroy':true,
       'ajax':{
         'method':'POST',
-        'url': 'ajax/noticeajax.php'
+        'url': 'ajax/bannerajax.php'
       },
       'columns':[
-        {'data':'titulo'},
-        {'data':'nombre'},
-        {'data':'fecha'},
+        {'data':'img'},
+        {'data':'orden'},
+        {'data':'activa'},
         {'defaultContent': "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	" }
       ],
       "language":idioma,
@@ -299,10 +298,11 @@ var mostrar_mensaje = function(informacion){
 
     var limpiar_datos = function(){
     $(".id").val("");
-    $(".title").val("");
-    $(".text").val("");
+    $(".type").val("");
+    $(".activa").val("");
     $(".img").val("");
-    $(".date").val("");
+    $('.link').val('');
+
     }
 
     var dataObteiner=function(tbody, table){
@@ -312,10 +312,10 @@ var mostrar_mensaje = function(informacion){
       $('#crear').hide();
       $('#elimiar').show();
       var form=$('.form').val(1)
-          id=$('#id').val(data.notice_id);
-          title=$('.title').val(data.titulo);
-          text=$('.text').val(data.texto);
-          date=$('#date').val(data.fecha);
+          id=$('#id').val(data.id);
+          title=$('.link').val(data.link);
+          text=$('.type').val(data.orden);
+          date=$('.activa').val(data.activa);
 
           var opcion=$('#opcion').val(0);
           $("#cuadro2").slideDown("slow");
@@ -331,16 +331,8 @@ var mostrar_mensaje = function(informacion){
       $('#elimiar').hide();
       $('#crear').show();
       $('#crear').removeAttr("type").attr("type", "submit");
-      var form=$('.form').val(0);
-      var d = new Date();
 
-      var month = d.getMonth()+1;
-      var day = d.getDate();
 
-      var output = d.getFullYear() + '-' +
-          (month<10 ? '0' : '') + month + '-' +
-          (day<10 ? '0' : '') + day;
-          date=$('#date').val(output)
           id=$('.id').val('null');
       var opcion=$('#opcion').val(1);
           $("#cuadro2").slideDown("slow");

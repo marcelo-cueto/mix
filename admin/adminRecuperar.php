@@ -4,7 +4,7 @@ include_once 'partials/head.php';
 require_once 'controllers/Alert.php';
 require_once 'controllers/user.php';
 
-if (isset($_POST['email'])) {
+if (isset($_POST['admin_email'])) {
    $user = user::existsByEmail($_POST['email']);
    if (!$user) {
       Alert::set_msg('El email no está registrado o ya fue enviada la clave', 'danger');

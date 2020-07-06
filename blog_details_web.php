@@ -2,6 +2,7 @@
 require_once 'admin/controllers/notice.php';
 require_once 'admin/controllers/comment.php';
 require_once 'admin/controllers/user.php';
+require_once 'admin/controllers/suscriptor.php';
 
 if (!isset($_GET['nid'])) {
    header('Location: blog_web.php');
@@ -56,22 +57,23 @@ $user = User::userById($notice->getAutor());
             <div class="navigation-area">
                <a class="button mt-xl-3" href="blog_web.php"><i class="ti-arrow-left"></i> Volver a Noticias</a>
             </div>
+
             <div class="comments-area">
                <h4><?php echo count($comments); ?> Comentarios</h4>
                <?php foreach ($comments as $c) { ?>
                   <div class="comment-list">
                   <div class="single-comment justify-content-between d-flex">
                      <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                           <img src="img/blog/c1.jpg" alt="">
-                        </div>
+
                         <div class="desc">
                            <h5>
-                              <a href="#">Emilly Blunt</a>
+                              <?php $s=Suscriptor::getById($c->getAutor());
+                              echo $s['name'].' '.$s['surname'];?>
                            </h5>
-                           <p class="date">December 4, 2017 a las 3:12 </p>
+
+                           <p class="date" style='color:#fff;'><?php echo $c->getDatetime(); ?> </p>
                            <p class="comment">
-                              Never say goodbye till the end comes!
+                              <?php echo $c->getComent(); ?>
                            </p>
                         </div>
                      </div>
@@ -81,18 +83,22 @@ $user = User::userById($notice->getAutor());
 
 
             </div>
+            <?php if(isset($_SESSION['email'])): ?>
             <div class="comment-form">
                <h4 style='color:#fff;'>Dejá tu comentario</h4>
-               <form>
+               <form id="coform" class='needs-validation' action="" method="post" >
+
                   <div class="form-group">
-                     <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
+                     <input type="hidden" class="form-control" id="subject" name='subject'value=<?php echo $_SESSION['id']; ?>>
+                     <input type="hidden" class="form-control" id="notice" name='notice'value=<?php echo $notice->getId(); ?>>
                   </div>
                   <div class="form-group">
-                     <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                     <textarea class="form-control mb-10" rows="5" id="message" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                   </div>
-                  <a href="#" class="button button-postComment">Publicar</a>
+                  <button type="submit"  class="button button-postComment" name="button">Comentar </button>
                </form>
             </div>
+          <?php endif; ?>
          </div>
 
       </div>
@@ -101,3 +107,36 @@ $user = User::userById($notice->getAutor());
 <!--================Blog Area =================-->
 
 <?php require_once 'footer_web.php'; ?>
+<script type="text/javascript">
+$(document).ready(function() {
+
+
+  guardar();
+
+
+
+})
+
+
+var guardar=function(){
+  $('#coform').on('submit', function(e){
+    e.preventDefault();
+    var frm=$('#coform').serialize();
+    console.log(frm);
+    $.ajax({
+      method:'POST',
+      url: 'ajax/savecom.php',
+      data: frm
+    }).done(function(info){
+      console.log(info);
+
+      limpiar_datos();
+      location. reload();
+    })
+  })
+}
+function limpiar_datos(){
+  $('#subjet').val();
+  $('#message').val();
+}
+</script>

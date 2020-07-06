@@ -105,8 +105,8 @@
 								</div>
 							</div>
 						<div class="form-group">
-                     
-							<input type="submit" value="Registrarme" class="btn btn-primary">
+
+							<input type="submit" value="Registrarme" class="button mt-xl-3">
 						</div>
 
 					</form>
@@ -130,13 +130,13 @@
 <?php require_once 'footer_web.php'; ?>
 <script type="text/javascript">
 $(document).ready(function() {
-	limpiar_datos()
+
 	guardar();
 
 })
 
 var guardar=function(){
-	$('#register').on('submit', function(e){
+	$('#register').on('click', function(e){
 		e.preventDefault();
 		var frm=$('#register').serialize();
 
@@ -148,6 +148,7 @@ var guardar=function(){
 
 			mostrar_mensaje(info);
 			limpiar_datos();
+
 		})
 	})
 }
@@ -158,11 +159,12 @@ var limpiar_datos = function(){
 	$("#register #dir").val("");
 	$("#register #tel").val("");
 	$("#register #email").val("");
-	
+
 	$("#register #exampleCheck1").prop("checked", false);
 	$("#register #coment").val("");
 
 }
+
 var mostrar_mensaje = function(informacion){
 
 	switch (informacion) {

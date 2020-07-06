@@ -13,7 +13,7 @@ include_once 'partials/head.php'; ?>
 <div id="content" class="p-4 p-md-5 pt-5">
   <div class="d-flex">
     <h2 class="mb-4" style="width:80%">Administradores</h2>
-    <button type='button' id='' class='add btn btn-success float-right'  ><i class='fa fa-plus'></i></button>
+    <button type='button' id='' class='add btn btn-success float-right'  ><i class='fa fa-plus' ></i></button>
   </div>
 
   <div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar" >

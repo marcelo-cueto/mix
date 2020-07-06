@@ -5,42 +5,56 @@ if (!isset($_SESSION['admin_email'])) {
     header('Location: adminLogin.php');
     exit();
 }
-include_once 'ajax/clicknot.php';
 include_once 'partials/head.php'; ?>
 <?php include_once 'partials/sidebar.php'; ?>
 
 <div id="content" class="p-4 p-md-5 pt-5" type='hidden'>
   <div class="d-flex">
     <h2 class="mb-4" style="width:80%">Noticias</h2>
-    <button type='button' id='' class='add btn btn-success float-right'  ><i class="fas fa-plus"></i></button>
+    <button type='button' id='' class='add btn btn-success float-right'  ><i class='fa fa-plus' ></i></button>
   </div>
   <div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar" >
-       <h2 class="mb-4">Editar Noticias</h2>
+       <h2 class="mb-4">Editar Suscripciones</h2>
        <form id="editform" action="" enctype="multipart/form-data" method="post" class="col-sm-12 col-md-12 col-lg-12">
          <div class="form-row">
+           <label for="total">Monto de la suscrpción</label>
+           <input type="" class='total form-control' name='total' value="">
+           <input type="hidden" id='currency' name='currency' value="ARS" >
+           <input type="hidden" id='type' name='type' value="dynamic" >
+           <label for="name">Nombre de la Suscripcion</label>
+           <input type="" class='name form-control' name='name' value="">
+           <label for="description">Descripción</label>
+           <input type="" class='description form-control' name='description' value="">
+           <label for="interval">Intervalo de Cobros</label>
+           <select class="interval form-control" name="interval">
+             <option value="7d">7 días</option>
+             <option value="15d">15 días</option>
+             <option value="1m">1 mes</option>
+             <option value="2m">2 meses</option>
+             <option value="3m">3 meses</option>
+             <option value="6m">6 meses</option>
+             <option value="1y">1 año</option>
+
+           </select>
+           <label for="trial">Periodo de Prueba</label>
+           <select class="interval form-control" name="trial">
+             <option value="">Sin periodo de prueba</option>
+             <option value="7d">7 días</option>
+             <option value="15d">15 días</option>
 
 
-         <input type="hidden" id='id' name='id' value="" >
-         <label for="title">Titulo</label>
-         <input type="text" class='title form-control' name='title' value="">
+           </select>
 
-         <textarea id='text'name="text" class='text form-control'rows="12" style='width:80%;'></textarea>
-
-
-
-         <input type="file" class='img form-control' id='img' name='img' value="" >
-         <label for="type">Tipo de Noticia</label>
-          <select class="type form-control" name="type">
-            <option value=0>Basico</option>
-            <option value=1>Pago</option>
-          </select>
-         <div class="">
+           <label for="limit">Cantidad de periodos</label>
+           <select class="interval form-control" name="limit">
+             <option value=0>Indefinido</option>
+             <option value=1>1 periodo</option>
+             <option value=2>2 periodos</option>
+             <option value=3>3 periodos</option>
 
 
+           </select>
 
-         <input id='date'type="hidden" name="date" value="">
-         <input type="hidden" id='autor' name="autor" value=<?php echo $_SESSION['id'] ?>>
-         </div>
          <input id='opcion' type="hidden" name="opcion" value="">
          <input id="crear" type="button" class="btn btn-success" value="Crear" style="margin: 1%">
          <input id="guardar" type="submit" class="btn btn-primary" value="Guardar" style="margin: 1%">
@@ -74,9 +88,17 @@ include_once 'partials/head.php'; ?>
 
 
     <tr>
-      <th>Titulo</th>
-      <th>Autor</th>
-      <th>Fecha de creación</th>
+
+      <th>Id de aplicacion</th>
+      <th>intervalo</th>
+      <th>limite </th>
+      <th>URL corta</th>
+      <th>URL</th>
+      <th>Moneda</th>
+      <th>Estado</th>
+      <th>Descripción</th>
+      <th>Monto</th>
+      <th>Fecha de creacion</th>
       <th></th>
     </tr>
     </thead>
@@ -117,62 +139,31 @@ include_once 'partials/head.php'; ?>
     dataAdd();
 
 
-    ck();
+
 
 
   })
   $('#listar').on('click', function(){
     listar();
   })
-  var ck=function(){
-    $('#text').ckeditor({
-
-       removePlugins :'easyimage,cloudservices',
-       filebrowserUploadUrl : 'ajax/upload.php?type=file',
-       filebrowserImageUploadUrl: 'ajax/upload.php?type=image',
 
 
-    });
-  }
-  $(".img").change(function() {
-       var file = this.files[0];
-       var imagefile = file.type;
-       var match= ["image/jpeg","image/png","image/jpg"];
-       if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
-           alert('Please select a valid image file (JPEG/JPG/PNG).');
-           $(".img").val('');
-           return false;
-       }
-   });
 
 
   var guardar=function(){
     $('#editform').on('submit', function(e){
       e.preventDefault();
 
-      var frm= new FormData();
-      frm.append('title', $('.title').val());
-      frm.append('text', $('.text').val());
-      frm.append('type', $('.type').val());
-      frm.append('date', $('#date').val());
-      frm.append('autor', $('#autor').val());
-      frm.append('opcion', $('#opcion').val());
-      frm.append('img',  $('#img')[0].files[0]);
+      var frm=$(this).serialize();
 
-
-
-      console.log(frm);
       $.ajax({
         method:'POST',
-        url: 'ajax/saveNotice.php',
+        url: 'ajax/createsusc.php',
         data: frm,
-        contentType: false,
-        processData: false,
+
       }).done(function(info){
         console.log(info);
-        mostrar_mensaje(info);
-        limpiar_datos();
-        listar();
+
       })
     })
   }
@@ -200,12 +191,19 @@ include_once 'partials/head.php'; ?>
       'destroy':true,
       'ajax':{
         'method':'POST',
-        'url': 'ajax/noticeajax.php'
+        'url': 'ajax/tsusajax.php'
       },
       'columns':[
-        {'data':'titulo'},
-        {'data':'nombre'},
-        {'data':'fecha'},
+        {'data':'uid'},
+        {'data':'intervalo'},
+        {'data':'limite'},
+        {'data':'shorten_url'},
+        {'data':'url'},
+        {'data':'currency'},
+        {'data':'status'},
+        {'data':'description'},
+        {'data':'total'},
+        {'data':'created'},
         {'defaultContent': "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	" }
       ],
       "language":idioma,
@@ -214,7 +212,7 @@ include_once 'partials/head.php'; ?>
 
           {
               extend:    'excelHtml5',
-              text:      '<i class="far fa-file-excel fa-2x"></i>',
+              text:      '<i class="far fa-file-excel fa-2x" ></i>',
               titleAttr: 'Excel'
           },
           {

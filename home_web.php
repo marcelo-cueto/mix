@@ -1,12 +1,16 @@
 <?php session_start();
-require_once 'header_web.php'; 
+require_once 'ajax/countbdd.php';
+require_once 'header_web.php';
+require_once 'admin/controllers/notice.php';
+$banner=Notice::banner();
+
 ?>
 
 <!--================Banner carrusel =================-->
 <section>
    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
-         <div class="carousel-item active">
+        <div class="carousel-item active">
             <a href="home_web.php">
                <img class="d-block w-100" src="img/banner/banner-1.jpg" alt="First slide">
                <div class="carousel-caption d-none d-md-block">
@@ -15,33 +19,22 @@ require_once 'header_web.php';
                </div>
             </a>
          </div>
-         <div class="carousel-item">
-            <a href="about_web.php">
-               <img class="d-block w-100" src="img/banner/banner-2.jpg" alt="Second slide">
-               <div class="carousel-caption d-none d-md-block">
-                  <div class="texto-carrusel">
-                  </div>
-               </div>
-            </a>
-         </div>
-         <div class="carousel-item">
-            <a href="blog_web.php">
-               <img class="d-block w-100" src="img/banner/banner-3.jpg" alt="Third slide">
-               <div class="carousel-caption d-none d-md-block">
-                  <div class="texto-carrusel">
-                  </div>
-               </div>
-            </a>
-         </div>
-         <div class="carousel-item">
-            <a href="suscriptors_login_web.php">
-               <img class="d-block w-100" src="img/banner/banner-4.jpg" alt="Fourth slide">
-               <div class="carousel-caption d-none d-md-block">
-                  <div class="texto-carrusel">
-                  </div>
-               </div>
-            </a>
-         </div>
+        <?php foreach ($banner as $b): ?>
+          <div class="carousel-item ">
+             <a href=<?php echo $b['link']; ?>>
+               <?php $a=$b['orden'];
+               $c=Notice::place($a);
+               ?>
+                <img class="d-block w-100" src="img/banner/<?php echo $b['nombre'];?>" alt= "<?php echo $c;?>">
+                <div class="carousel-caption d-none d-md-block">
+                   <div class="texto-carrusel">
+                   </div>
+                </div>
+             </a>
+          </div>
+        <?php endforeach; ?>
+
+
       </div>
       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
          <span class="ti-angle-left flecha" aria-hidden="true"></span>

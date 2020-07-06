@@ -7,10 +7,13 @@
                     <span class="sr-only">Toggle Menu</span>
                 </button>
             </div>
-            <h1><a href="index.html" class="logo">Enlace Profesional</a></h1>
+            <a class="navbar-brand logo_h " href="admin.php" style='padding:6%;'><img src="../img/logo.png" alt=""></a>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
                     <a href="adminNoticias.php"><span class="fas fa-newspaper mr-3"></span> Noticias</a>
+                </li>
+                <li>
+                    <a href="carrusel.php"><span class="fas fa-images mr-3"></span> Banner</a>
                 </li>
                 <li>
                     <a href="adminSuscriptores.php"><span class="fas fa-address-card mr-3"></span> Suscriptores</a>
@@ -24,6 +27,10 @@
                 <li>
                     <a href="adminclient.php"><span class="far fa-address-card mr-3"></span> Clientes</a>
                 </li>
+                <li>
+                    <a href="adminSustype.php"><span class="fas fa-book mr-3"></span> Suscripciones</a>
+                </li>
+
                 <li>
                     <a href="adminLogout.php"><span class="fas fa-sign-out-alt mr-3"></span> Cerrar Sesion</a>
                 </li>

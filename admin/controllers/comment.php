@@ -6,12 +6,15 @@ Class Comment {
    private $coment;
    private $notice_id;
    private $datetime;
+   private $autor;
+
 
    public function __construct($data = []) {
       if (isset($data['id'])) $this->id = $data['id'];
       if (isset($data['coment'])) $this->coment = $data['coment'];
       if (isset($data['notice_id'])) $this->notice_id = $data['notice_id'];
-      if (isset($data['datetime'])) $this->datetime = $data['datetime'];
+      if (isset($data['datetimes'])) $this->datetime = $data['datetimes'];
+      if (isset($data['idsuscriptor'])) $this->autor = $data['idsuscriptor'];
    }
 
    public function getId() {
@@ -44,6 +47,13 @@ Class Comment {
 
    public function setDatetime($datetime) {
       $this->datetime = $datetime;
+   }
+   public function getAutor() {
+      return $this->autor;
+   }
+
+   public function setAutor($autor) {
+      $this->autor = $autor;
    }
 
    public static function getAllComments() {
