@@ -1,4 +1,12 @@
-<?php require_once 'header_web.php'; ?>
+
+<?php require_once 'header_web.php';
+if($_POST){
+ require_once ('ajax/mobbex.php');
+ $_SESSION['sus_email'] = $_POST['email'];
+
+ setcookie("email", $_SESSION['sus_email'], time() + 60 * 60 * 24 * 30);
+ header('Location: 	http://mbbx.co/q9PwnzP');
+} ?>
 
 
 
@@ -10,7 +18,7 @@
 
 				<div class="col-md-9 animate-box center" >
 					<h3>Registro de  profesional</h3>
-					<form id='register' action="#" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
+					<form id='register' action="register.php" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
 						<div class="row form-group">
 							<div class="col-md-6">
 								<!-- <label for="fname">First Name</label> -->
@@ -149,7 +157,7 @@
 						<div class="form-group">
 							<input type="hidden" name="latitud" id="latitud" value="">
 							<input type="hidden" name="longitud" id="longitud" value="">
-							<input id='pago'type="button" value="Enviar y suscribirme acá" class="button mt-xl-3" >
+							<input id='pago'type="submit" value="Enviar y suscribirme acá" class="button mt-xl-3" >
 							<button type="button" class="button mt-xl-3" name="button" >Enviar y solicitar contacto</button>
 						</div>
 
@@ -176,7 +184,7 @@
 $(document).ready(function() {
 
 geoposicionar();
-crs();
+
 
 })
 function geoposicionar(){

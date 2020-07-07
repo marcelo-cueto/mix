@@ -3,7 +3,7 @@ include ('conect.php');
 
 $query='SELECT c.id as coment_id,
 c.coment as comentario,
-c.datetime as fecha,
+c.datetimes as fecha,
 n.id as notice_id,
 n.title as titulo,
 s.id as sus_id,

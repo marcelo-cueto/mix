@@ -1,5 +1,5 @@
 <?php
-$customer=json_encode(array('total' => 100.00,'currency' => 'ARS','type'=> 'dynamic','name'=>'Enlace Profesional', 'description' => 'Enlace Profesional', 'interval'=>'1m', 'limit'=>0, 'return_url'=>'admin/pago.php'));
+$customer=json_encode(array('total' => 100.00,'currency' => 'ARS','type'=> 'dynamic','name'=>'Enlace Profesional', 'description' => 'Enlace Profesional', 'interval'=>'1m', 'limit'=>0, 'return_url'=>'localhost/mix1/pago.php'));
 $sdate=json_encode(array('day'=> date("d"),'month'=>date("m")));
 $data=json_encode(array('customer'=> $customer,'startDate'=>$sdate,'reference'=>$res['id']));
 
@@ -8,7 +8,7 @@ $payload = json_encode($data);
 $curl = curl_init();
 
   curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://api.mobbex.com/p/subscriptions",
+    CURLOPT_URL => "https://mobbex.com/p/subscriptions/aXtHUdPsI",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
