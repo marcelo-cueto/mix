@@ -353,25 +353,21 @@ class Suscriptor
    }
    public static function mobbexsucriber($email, $dni)
    {
-     include_once ('admin/ajax/conect.php');
+      include_once('admin/ajax/conect.php');
+      global $conn;
+      $query = "SELECT * FROM suscriptions WHERE email='$email'";
 
-     $query ="SELECT * FROM suscriptions WHERE email='$email'";
+      $re = mysqli_query($conn, $query);
+      $res = mysqli_fetch_assoc($re);
+      mysqli_close($conn);
 
-     $re=mysqli_query($conn,$query);
-     $res=mysqli_fetch_assoc($re);
-     mysqli_close();
+      $customer = json_encode(array('identification' => $dni, 'email' => $email, 'name' => $res['name'] . ' ' . $res['surname']));
+      $sdate = json_encode(array('day' => date("d"), 'month' => date("m")));
+      $data = json_encode(array('customer' => $customer, 'startDate' => $sdate, 'reference' => $res['id']));
 
-     var_dump($res);
+      $curl = curl_init();
 
-     $customer=json_encode(array('identification' => $dni,'email' => $email,'name'=> $res['name'] .' '.$res['surname'] ));
-     $sdate=json_encode(array('day'=> date("d"),'month'=>date("m")));
-     $data=json_encode(array('customer'=> $customer,'startDate'=>$sdate,'reference'=>$res['id']));
-
-     var_dump($data);
-     $payload = json_encode($data);
-     $curl = curl_init();
-
-       curl_setopt_array($curl, array(
+      curl_setopt_array($curl, array(
          CURLOPT_URL => "https://api.mobbex.com/p/subscriptions/aXtHUdPsI/subscriber",
          CURLOPT_RETURNTRANSFER => true,
          CURLOPT_ENCODING => "",
@@ -381,24 +377,37 @@ class Suscriptor
          CURLOPT_CUSTOMREQUEST => "POST",
          CURLOPT_POSTFIELDS => $data,
          CURLOPT_HTTPHEADER => array(
-           "Content-Type: application/json",
-           "cache-control: no-cache",
-           "x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
-           "x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT",
-           "x-lang: es"
+            "Content-Type: application/json",
+            "cache-control: no-cache",
+            //"x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
+            "x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
+            //"x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT",
+            "x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj",
+            "x-lang: es"
          ),
-       ));
+      ));
 
-       $response = curl_exec($curl);
-       $err = curl_error($curl);
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
 
-       curl_close($curl);
+      curl_close($curl);
 
-       if ($err) {
+      if ($err) {
          return "cURL Error #:" . $err;
-       } else {
+      } else {
          return $response;
-       }
+      }
+   }
 
+   public static function getTypesus(){
+      global $conn;
+      try {
+         $query = $conn->prepare("SELECT * FROM typesus");
+         $query->execute();
+         $info = $query->fetchAll(PDO::FETCH_ASSOC);
+         return $info;
+      } catch (PDOException $e) {
+         return $e->getMessage();
+      }
    }
 }

@@ -28,7 +28,7 @@ else
 $sql1 = "INSERT INTO contador (id, ip, fecha, hora, horau, diau, aniou) VALUES (NULL,'$ip','$fecha','$hora','$horau','$diau','$aniou')";
 $es1 =mysqli_query($conn,$sql1);
 
-mysqli_close();
+mysqli_close($conn);
 }
 //creamos el condicionamiendo para logearlo o no.
 

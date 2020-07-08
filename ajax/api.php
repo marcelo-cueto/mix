@@ -21,7 +21,7 @@ $sdate=json_encode(array('day'=> date("d"),'month'=>date("m")));
 $data=json_encode(array('customer'=> $customer,'startDate'=>$sdate,'reference'=>$res['id']));
 
 
-$payload = json_encode($data);
+
 $curl = curl_init();
 
   curl_setopt_array($curl, array(
@@ -32,7 +32,7 @@ $curl = curl_init();
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => $payload,
+    CURLOPT_POSTFIELDS => $data,
     CURLOPT_HTTPHEADER => array(
       "Content-Type: application/json",
       "cache-control: no-cache",

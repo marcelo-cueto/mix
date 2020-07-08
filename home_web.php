@@ -2,6 +2,7 @@
 require_once 'ajax/countbdd.php';
 require_once 'header_web.php';
 require_once 'admin/controllers/notice.php';
+
 $banner=Notice::banner();
 
 ?>

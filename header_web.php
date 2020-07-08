@@ -16,6 +16,8 @@
    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
    <link rel="stylesheet" href="vendors/Magnific-Popup/magnific-popup.css">
    <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="vendors/bootstrap/pricing.css">
+   <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/pricing/">
 
    <style>
       .texto-carrusel{
@@ -26,6 +28,21 @@
 
       .flecha {
          font-size: 28px;
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
       }
    </style>
 </head>
