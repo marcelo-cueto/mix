@@ -25,7 +25,7 @@ $payload = json_encode($data);
 $curl = curl_init();
 
   curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://api.mobbex.com/p/subscriptions/ZTXW00bvi/subscriber",
+    CURLOPT_URL => "https://api.mobbex.com/p/subscriptions/aXtHUdPsI/subscriber",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,

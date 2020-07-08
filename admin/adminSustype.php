@@ -10,7 +10,7 @@ include_once 'partials/head.php'; ?>
 
 <div id="content" class="p-4 p-md-5 pt-5" type='hidden'>
   <div class="d-flex">
-    <h2 class="mb-4" style="width:80%">Noticias</h2>
+    <h2 class="mb-4" style="width:80%">Suscripciones</h2>
     <button type='button' id='' class='add btn btn-success float-right'  ><i class='fa fa-plus' ></i></button>
   </div>
   <div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar" >
@@ -44,7 +44,7 @@ include_once 'partials/head.php'; ?>
 
 
            </select>
-
+           <input type="hidden" class='uid'name="uid" value="">
            <label for="limit">Cantidad de periodos</label>
            <select class="interval form-control" name="limit">
              <option value=0>Indefinido</option>
@@ -162,7 +162,9 @@ include_once 'partials/head.php'; ?>
         data: frm,
 
       }).done(function(info){
-        console.log(info);
+        mostrar_mensaje(info);
+        limpiar_datos();
+        listar();
 
       })
     })
@@ -170,14 +172,15 @@ include_once 'partials/head.php'; ?>
 
   var eliminar=function(){
     $('#elimiar').on('click', function(e){
-      var id=$('#editform #id').val()
-      console.log(id);
+      var id=$('.uid').val()
+
       $.ajax({
         method:'POST',
-        url: 'ajax/eliminarNoticia.php',
+        url: 'ajax/aliminarsustype.php',
         data: {'id':id}
       }).done(function(info){
-        console.log(info);
+
+        mostrar_mensaje(info);
         limpiar_datos();
         listar();
 
@@ -204,7 +207,7 @@ include_once 'partials/head.php'; ?>
         {'data':'description'},
         {'data':'total'},
         {'data':'created'},
-        {'defaultContent': "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	" }
+        {'defaultContent': "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='activar btn btn-succes' style='margin-top:1%;'><i id='activar' class='fas fa-power-off'></i></button>" }
       ],
       "language":idioma,
         dom: 'Bfrtip',
@@ -231,7 +234,7 @@ include_once 'partials/head.php'; ?>
     });
       dataObteiner('.notice tbody', table);
       dataDeleter('.notice tbody', table);
-
+      activarcolor('.notice tbody', table);
       $('#crear').show();
       $('#guardar').show();
     }
@@ -296,11 +299,13 @@ var mostrar_mensaje = function(informacion){
 }
 
     var limpiar_datos = function(){
-    $(".id").val("");
-    $(".title").val("");
-    $(".text").val("");
-    $(".img").val("");
-    $(".date").val("");
+    $(".name").val("");
+    $(".inteval").val("");
+    $(".limit").val("");
+    $(".description").val("");
+    $(".trial").val("");
+    $(".uid").val("");
+    $(".total").val("");
     }
 
     var dataObteiner=function(tbody, table){
@@ -309,12 +314,14 @@ var mostrar_mensaje = function(informacion){
       $('#guardar').removeAttr("type").attr("type", "submit");
       $('#crear').hide();
       $('#elimiar').show();
-      var form=$('.form').val(1)
-          id=$('#id').val(data.notice_id);
-          title=$('.title').val(data.titulo);
-          text=$('.text').val(data.texto);
-          date=$('#date').val(data.fecha);
-
+      var form=$('.form').val(1);
+          name=$('.name').val(data.name);
+          name=$('.total').val(data.total);
+          inteval=$('.inteval').val(data.intevalo);
+          limit=$('.limit').val(data.limite);
+          description=$('.description').val(data.description);
+          trial=$('.trial').val(0);
+          trial=$('.uid').val(data.uid);
           var opcion=$('#opcion').val(0);
           $("#cuadro2").slideDown("slow");
           $("#cuadro1").slideUp("slow");
@@ -330,25 +337,38 @@ var mostrar_mensaje = function(informacion){
       $('#crear').show();
       $('#crear').removeAttr("type").attr("type", "submit");
       var form=$('.form').val(0);
-      var d = new Date();
 
-      var month = d.getMonth()+1;
-      var day = d.getDate();
-
-      var output = d.getFullYear() + '-' +
-          (month<10 ? '0' : '') + month + '-' +
-          (day<10 ? '0' : '') + day;
-          date=$('#date').val(output)
-          id=$('.id').val('null');
       var opcion=$('#opcion').val(1);
           $("#cuadro2").slideDown("slow");
           $("#cuadro1").slideUp("slow");
     });
   };
+  var activarcolor=function(tbody, table){
+    $(tbody).on('click','button.activar', function(){
+      var data=table.row($(this).parents('tr')).data();
+      if (data.status=='0'){
+        var id=data.uid;
+        console.log(id);
+        $.ajax({
+          method:'POST',
+          url: 'ajax/activarsustype.php',
+          data: {'id':id}
+        }).done(function(info){
+          console.log(info);
+          mostrar_mensaje(info);
+          limpiar_datos();
+          listar();
+
+        })
+      }else{
+        $('button.activar').hide()
+      }
+    })
+  }
     var dataDeleter=function(tbody, table){
   $(tbody).on('click','button.eliminar', function(){
     var data=table.row($(this).parents('tr')).data();
-    var id=$('.deleteform .id').val(data.notice_id);
+    var id=$('.deleteform .id').val(data.uid);
     var opcion='eliminar'
     console.log(id);
 

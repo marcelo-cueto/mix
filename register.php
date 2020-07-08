@@ -1,11 +1,13 @@
 
 <?php require_once 'header_web.php';
+require_once ('admin/controllers/suscriptor.php');
 if($_POST){
  require_once ('ajax/mobbex.php');
- $_SESSION['sus_email'] = $_POST['email'];
+$email=$_POST['email'];
+$dni=$_POST['dni'];
+$a=Suscriptor::mobbexsucriber($email,$dni);
+ var_dump($a);
 
- setcookie("email", $_SESSION['sus_email'], time() + 60 * 60 * 24 * 30);
- header('Location: 	http://mbbx.co/q9PwnzP');
 } ?>
 
 

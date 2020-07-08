@@ -4,9 +4,9 @@
         <div class="col-lg-12 col-sm-12 footer-social text-center">
             <h6>Seguinos en nuestras redes sociales</h6>
             <div class="col-lg-12 col-sm-12 footer-social text-center">
-                <a href="#"><i class="fab fa-linkedin" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
-                <a href="#"><i class="fab fa-instagram" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
-                <a href="#"><i class="fab fa-facebook" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
+                <a href="https://www.linkedin.com/company/enlace-profesional/?viewAsMember=true"><i class="fab fa-linkedin" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
+                <a href="https://www.instagram.com/enlaceprofesional/"><i class="fab fa-instagram" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
+                <a href="https://www.facebook.com/Enlace-Profesional-102569741518727"><i class="fab fa-facebook" aria-hidden="true" style="font-size:32px;color:#60E2D2;"></i></a>
 
             </div>
 
@@ -42,7 +42,7 @@
           method: "POST", //o GET, la diferencia es que se vean los datos o no en el enlace
           data : {'where':'not'}
         }).done(function(data){
-          
+
         })
       });
       })

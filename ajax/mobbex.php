@@ -141,7 +141,7 @@ if( $name != "" && $surname != "" && $email != "" && $profesion != ""  && $conoc
 
       verify($resutltado);
       close($conn);
-
+      
   }
 
 }else{
