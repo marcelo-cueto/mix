@@ -1,10 +1,11 @@
 <?php 
+session_start();
 require_once 'admin/controllers/suscriptor.php';
 /*if ($_POST) {
    require_once('ajax/mobbex.php');
    $email = $_POST['email'];
    $dni = $_POST['dni'];
-   $a = Suscriptor::mobbexsucriber($email, $dni);
+   $a = Suscriptor::mobbexsuscriber($email, $dni);
    var_dump($a);
 } */
 if ($_POST) {

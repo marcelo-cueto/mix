@@ -1,14 +1,20 @@
 <?php
+session_start();
 require_once 'admin/controllers/suscriptor.php';
 
-/*if (empty($_SESSION['sus_email'])){
+if (empty($_SESSION['sus_email'])){
    header('Location: register.php');
    exit();
-}*/
+}
 
 if ($_POST) {
-   $sus = Suscriptor::existsByEmail($_SESSION['sus_id']);
-   var_dump($sus);
+   $sus = Suscriptor::existsByEmail($_SESSION['sus_email']);
+   if ($_POST['uid']=='free') {
+      var_dump($sus);
+      exit();
+   }
+   $result = Suscriptor::mobbexsuscriber($_SESSION['sus_email'], $_SESSION['sus_dni'], $_POST['uid']);
+   var_dump($result);
    exit();
 }
 
@@ -30,7 +36,7 @@ require_once 'header_web.php';
                <p>Descripcion</p>
             </ul>
             <form action="typesus_web.php" method="post">
-               <input type="hidden" name="uid" id="uid" value="">
+               <input type="hidden" name="uid" id="uid" value="free">
                <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
             </form>
          </div>

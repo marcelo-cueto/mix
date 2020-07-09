@@ -351,15 +351,18 @@ class Suscriptor
       */
       return;
    }
-   public static function mobbexsucriber($email, $dni)
+   public static function mobbexsuscriber($email, $dni, $uid)
    {
-      include_once('admin/ajax/conect.php');
-      global $conn;
+      $con = mysqli_connect('localhost', 'root', 'root', 'florencia');
+      if (!$con) {
+         die('Error de conexion: ' . mysqli_connect_errno());
+      }
+
       $query = "SELECT * FROM suscriptions WHERE email='$email'";
 
-      $re = mysqli_query($conn, $query);
+      $re = mysqli_query($con, $query);
       $res = mysqli_fetch_assoc($re);
-      mysqli_close($conn);
+      mysqli_close($con);
 
       $customer = json_encode(array('identification' => $dni, 'email' => $email, 'name' => $res['name'] . ' ' . $res['surname']));
       $sdate = json_encode(array('day' => date("d"), 'month' => date("m")));
@@ -368,7 +371,10 @@ class Suscriptor
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-         CURLOPT_URL => "https://api.mobbex.com/p/subscriptions/aXtHUdPsI/subscriber",
+         // Modificar cuando se suba al host
+         CURLOPT_SSL_VERIFYPEER => false,
+
+         CURLOPT_URL => "https://api.mobbex.com/p/subscriptions/" . $uid . "/subscriber",
          CURLOPT_RETURNTRANSFER => true,
          CURLOPT_ENCODING => "",
          CURLOPT_MAXREDIRS => 10,
@@ -379,11 +385,13 @@ class Suscriptor
          CURLOPT_HTTPHEADER => array(
             "Content-Type: application/json",
             "cache-control: no-cache",
-            //"x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
-            "x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
-            //"x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT",
-            "x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj",
-            "x-lang: es"
+            "x-lang: es",
+            "x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
+            "x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT"
+
+            // Credenciales de prueba
+            //"x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
+            //"x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj"
          ),
       ));
 
@@ -399,7 +407,8 @@ class Suscriptor
       }
    }
 
-   public static function getTypesus(){
+   public static function getTypesus()
+   {
       global $conn;
       try {
          $query = $conn->prepare("SELECT * FROM typesus");

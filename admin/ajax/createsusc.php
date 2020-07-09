@@ -23,6 +23,9 @@ switch ($opcion) {
   $curl = curl_init();
 
     curl_setopt_array($curl, array(
+      // Modificar cuando se suba al host
+      CURLOPT_SSL_VERIFYPEER => false,
+
       CURLOPT_URL => "https://mobbex.com/p/subscriptions/".$_POST['uid']."?",
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
@@ -32,11 +35,15 @@ switch ($opcion) {
       CURLOPT_CUSTOMREQUEST => "POST",
       CURLOPT_POSTFIELDS => $customer,
       CURLOPT_HTTPHEADER => array(
-        "Content-Type: application/json",
-        "cache-control: no-cache",
-        "x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
-        "x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj",
-        "x-lang: es"
+         "Content-Type: application/json",
+         "cache-control: no-cache",
+         "x-lang: es",
+         "x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
+         "x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT"
+
+         // Credenciales de prueba
+         //"x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
+         //"x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj"
       ),
     ));
 
@@ -73,6 +80,9 @@ switch ($opcion) {
     $curl = curl_init();
 
       curl_setopt_array($curl, array(
+         // Modificar cuando se suba al host
+         CURLOPT_SSL_VERIFYPEER => false,
+
         CURLOPT_URL => "https://mobbex.com/p/subscriptions",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
@@ -82,11 +92,15 @@ switch ($opcion) {
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => $customer,
         CURLOPT_HTTPHEADER => array(
-          "Content-Type: application/json",
-          "cache-control: no-cache",
-          "x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
-          "x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj",
-          "x-lang: es"
+         "Content-Type: application/json",
+         "cache-control: no-cache",
+         "x-lang: es",
+         "x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
+         "x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT"
+
+         // Credenciales de prueba
+         //"x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
+         //"x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj"
         ),
       ));
 
