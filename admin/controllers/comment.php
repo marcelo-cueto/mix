@@ -13,8 +13,8 @@ Class Comment {
       if (isset($data['id'])) $this->id = $data['id'];
       if (isset($data['coment'])) $this->coment = $data['coment'];
       if (isset($data['notice_id'])) $this->notice_id = $data['notice_id'];
-      if (isset($data['datetimes'])) $this->datetime = $data['datetimes'];
-      if (isset($data['idsuscriptor'])) $this->autor = $data['idsuscriptor'];
+      if (isset($data['datetime'])) $this->datetime = $data['datetime'];
+      if (isset($data['autor'])) $this->autor = $data['autor'];
    }
 
    public function getId() {

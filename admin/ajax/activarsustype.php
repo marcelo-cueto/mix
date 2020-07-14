@@ -1,8 +1,7 @@
 <?php
 
-$uid=$_POST['id'];
-
-
+//$uid=$_POST['id'];
+$uid = 'A~6Dcoi8d';
 
 function verify($resultado){
   if(!$resultado){
@@ -54,6 +53,7 @@ $curl = curl_init();
     echo "cURL Error #:" . $err;
   } else {
     print_r($response);
+    
     include ('conect.php');
 
 
@@ -61,7 +61,6 @@ $curl = curl_init();
     $resutltado=mysqli_query($conn, $query);
     verify($resutltado);
     close($conn);
-
   }
 
  ?>

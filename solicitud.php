@@ -101,7 +101,7 @@
 
 								<div class="col-md-12">
 									<!-- <label for="email">Email</label> -->
-									<textarea id='coment' name="coment" rows="8" cols="80" placeholder="Deje su comentario aqui..."></textarea>
+									<textarea id='coment' name="coment" rows="8" cols="80" placeholder="Deje su comentario aqui..." required></textarea>
 								</div>
 							</div>
 						<div class="form-group">
@@ -136,7 +136,7 @@ $(document).ready(function() {
 })
 
 var guardar=function(){
-	$('#register').on('click', function(e){
+	$('#register').on('submit', function(e){
 		e.preventDefault();
 		var frm=$('#register').serialize();
 

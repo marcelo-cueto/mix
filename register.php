@@ -1,6 +1,7 @@
-<?php 
+<?php
 session_start();
 require_once 'admin/controllers/suscriptor.php';
+require_once 'admin/controllers/Alert.php';
 /*if ($_POST) {
    require_once('ajax/mobbex.php');
    $email = $_POST['email'];
@@ -9,12 +10,26 @@ require_once 'admin/controllers/suscriptor.php';
    var_dump($a);
 } */
 if ($_POST) {
-   $_SESSION['sus_email'] = $_POST['email'];
-   $_SESSION['sus_dni'] = $_POST['dni'];
-   require_once 'ajax/mobbex.php';
+   $_SESSION['email'] = $_POST['email'];
+   $_SESSION['dni'] = $_POST['dni'];
+   $_SESSION['cid'] = substr(md5(rand()), 0, 5);
+   $_POST['cid'] = $_SESSION['cid'];
+   //require_once 'ajax/mobbex.php';
    header('Location: typesus_web.php');
    exit();
-} 
+   /*
+   $sus = Suscriptor::existsByEmail($_SESSION['email']);
+   if (!$sus) {
+      require_once 'ajax/mobbex.php';
+      header('Location: typesus_web.php');
+      exit();
+   }
+   unset($_SESSION['email']);
+   unset($_SESSION['dni']);
+   unset($_SESSION['cid']);
+   Alert::set_msg('Ya hay un suscriptor registrado con este email', 'danger');
+   */
+}
 
 require_once 'header_web.php';
 ?>
@@ -350,4 +365,17 @@ require_once 'header_web.php';
                   xhr.send(data);
                   console.log(xhr);
                }
+            </script>
+            <script type="text/javascript">
+               $(document).ready(function() {
+                  $('#pago').click(function() {
+                     checked = $("input[type=checkbox]:checked").length;
+                     other = Boolean($('#otras').text() != "");
+                     if (!checked && !other) {
+                        alert("You must check at least one checkbox.");
+                        return false;
+                     }
+
+                  });
+               });
             </script>

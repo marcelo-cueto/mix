@@ -22,7 +22,7 @@ require_once 'header_web.php';
                <br>
                <h3>Inicio de sesión</h3>
                <br>
-               <?php if (isset($_SESSION['email'])) { ?>
+               <?php if (isset($_SESSION['sus_email'])) { ?>
                   <p>Ya hay un usuario conectado. Por favor, cierre la sesión para continuar.</p>
                <?php } else { ?>
                   <form id='register' action="suscriptors_login_web.php" class='needs-validation' method='post'>

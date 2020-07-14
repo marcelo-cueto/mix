@@ -83,13 +83,13 @@ $user = User::userById($notice->getAutor());
 
 
             </div>
-            <?php if(isset($_SESSION['email'])): ?>
+            <?php if(isset($_SESSION['sus_email'])): ?>
             <div class="comment-form">
                <h4 style='color:#fff;'>Dejá tu comentario</h4>
                <form id="coform" class='needs-validation' action="" method="post" >
 
                   <div class="form-group">
-                     <input type="hidden" class="form-control" id="subject" name='subject'value=<?php echo $_SESSION['id']; ?>>
+                     <input type="hidden" class="form-control" id="subject" name='subject'value=<?php echo $_SESSION['sus_id']; ?>>
                      <input type="hidden" class="form-control" id="notice" name='notice'value=<?php echo $notice->getId(); ?>>
                   </div>
                   <div class="form-group">

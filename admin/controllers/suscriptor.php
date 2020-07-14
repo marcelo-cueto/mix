@@ -300,6 +300,20 @@ class Suscriptor
       exit();
    }
 
+   public static function getById($id)
+   {
+      global $conn;
+      try {
+         $query = $conn->prepare("SELECT * FROM suscriptions WHERE id = :id");
+         $query->bindValue(':id', $id, PDO::PARAM_INT);
+         $query->execute();
+         $info = $query->fetch(PDO::FETCH_ASSOC);
+         return $info;
+      } catch (PDOException $e) {
+         return $e->getMessage();
+      }
+   }
+
    public static function existsByEmail($email)
    {
       global $conn;
@@ -364,10 +378,12 @@ class Suscriptor
       $res = mysqli_fetch_assoc($re);
       mysqli_close($con);
 
-      $customer = json_encode(array('identification' => $dni, 'email' => $email, 'name' => $res['name'] . ' ' . $res['surname']));
-      $sdate = json_encode(array('day' => date("d"), 'month' => date("m")));
-      $data = json_encode(array('customer' => $customer, 'startDate' => $sdate, 'reference' => $res['id']));
+      $dni = intval($dni);
 
+      $customer = json_encode(array('identification' => $dni, 'email' => $email, 'name' => $res['name'] . ' ' . $res['surname']));
+      $sdate = json_encode(array('day' => intval(date("d")), 'month' => intval(date("m"))));
+      $data = json_encode(array('customer' => $customer, 'startDate' => $sdate, 'reference' => $res['id']));
+      return $data;
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
@@ -385,9 +401,9 @@ class Suscriptor
          CURLOPT_HTTPHEADER => array(
             "Content-Type: application/json",
             "cache-control: no-cache",
-            "x-lang: es",
             "x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
-            "x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT"
+            "x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT",
+            "x-lang: es"
 
             // Credenciales de prueba
             //"x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
