@@ -19,30 +19,17 @@ require_once 'header_web.php'; ?>
 </div>
 
 '{
-   "customer":"{
-      \"identification\":\"31313131\",
-      \"email\":\"martinezmatias@mail.com\",
-      \"name\":\" \"
-   }",
-   "startDate":"{
-      \"day\":\"14\",
-      \"month\":\"07\"
-   }",
-   "reference":null
-}'
-
-'{
-   "customer":"{
-      \"identification\":32866449,
-      \"email\":\"algo2@mail.com\",
-      \"name\":\"Matias ol\"
-   }",
-   "startDate":"{
-      \"day\":14,
-      \"month\":7
-   }",
-   "reference":1
+   "result":true,
+   "data":{
+      "uid":"isRi2zLPT",
+      "reference":"6",
+      "sourceUrl":"https://mobbex.com/p/subscriptions/PN~LGKyfT/subscriber/isRi2zLPT/source",
+      "subscriberUrl":"https://mobbex.com/p/subscriptions/PN~LGKyfT/subscriber/isRi2zLPT",
+      "subscription":{
+            "uid":"PN~LGKyfT"
+      }
    }
+}'
 
 <?php require_once 'footer_web.php'; ?>
 

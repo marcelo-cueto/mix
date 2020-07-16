@@ -137,10 +137,10 @@ if (
       echo json_encode($info);
    } else {
       $query = "INSERT INTO suscriptions
-      (name, surname,tel, email, type, pass, profesion,sueldos,matricula,sociedades,monotributo,impuestos, autonomos, judiciales,gestion, certificaciones, contabilidad, otras, recomendado, comentario, mobbex_id)
+      (name, surname,tel, email, type, pass, profesion,sueldos,matricula,sociedades,monotributo,impuestos, autonomos, judiciales,gestion, certificaciones, contabilidad, otras, recomendado, comentario)
        VALUES
        ('$name', '$surname','$tel', '$email', '$type', '$pass','$profesion',
-          '$sueldos','$matricula','$sp','$mn','$impuestos', '$au', '$jd', '$gs', '$ce','$cb','$otras','$conocio', '$comentario', '$mobbex_id')";
+          '$sueldos','$matricula','$sp','$mn','$impuestos', '$au', '$jd', '$gs', '$ce','$cb','$otras','$conocio', '$comentario')";
       $resutltado = mysqli_query($conn, $query);
 
 

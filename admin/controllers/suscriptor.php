@@ -365,6 +365,19 @@ class Suscriptor
       */
       return;
    }
+
+   public static function deleteByEmail($email){
+      global $conn;
+      try {
+         $sql = "DELETE * FROM suscriptions WHERE email = $email";
+         $query = $conn->prepare($sql);
+         $query->execute();
+         return;
+      } catch (PDOException $e) {
+         return $e->getMessage();
+      }
+   }
+
    public static function mobbexsuscriber($email, $dni, $uid)
    {
       $con = mysqli_connect('localhost', 'root', 'root', 'florencia');
@@ -376,14 +389,13 @@ class Suscriptor
 
       $re = mysqli_query($con, $query);
       $res = mysqli_fetch_assoc($re);
-      mysqli_close($con);
+      //mysqli_close($con);
 
-      $dni = intval($dni);
+      $data = array('customer' => array('identification' => $dni, 'email' => $email, 'name' => $res['name'] . ' ' . $res['surname']), 
+                     'startDate' => array('day' => intval(date("d")), 'month' => intval(date("m"))), 
+                     'reference' => $res['id']);
+      $data = json_encode($data);
 
-      $customer = json_encode(array('identification' => $dni, 'email' => $email, 'name' => $res['name'] . ' ' . $res['surname']));
-      $sdate = json_encode(array('day' => intval(date("d")), 'month' => intval(date("m"))));
-      $data = json_encode(array('customer' => $customer, 'startDate' => $sdate, 'reference' => $res['id']));
-      return $data;
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
@@ -401,13 +413,13 @@ class Suscriptor
          CURLOPT_HTTPHEADER => array(
             "Content-Type: application/json",
             "cache-control: no-cache",
-            "x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
-            "x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT",
-            "x-lang: es"
+            //"x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
+            //"x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT",
 
             // Credenciales de prueba
-            //"x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
-            //"x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj"
+            "x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
+            "x-api-key: zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj",
+            "x-lang: es"
          ),
       ));
 
@@ -416,11 +428,36 @@ class Suscriptor
 
       curl_close($curl);
 
-      if ($err) {
-         return "cURL Error #:" . $err;
-      } else {
-         return $response;
+      if ($err) return "cURL Error #:" . $err;
+
+      $response = json_decode($response);
+      $data = [];
+      foreach ($response->data as $key => $value) {
+         $data[$key] = $value;
       }
+      $data['subscription'] = $data['subscription']->uid;
+
+      $query = "UPDATE suscriptions SET uid = '";
+      $query .= $data['uid'];
+      $query .= "', reference = '";
+      $query .= $data['reference'];
+      $query .= "', source_url = '";
+      $query .= $data['sourceUrl'];
+      $query .= "', subscriber_url = '";
+      $query .= $data['subscriberUrl'];
+      $query .= "', subscription_uid = '";
+      $query .= $data['subscription'];
+      $query .= "' WHERE email = '";
+      $query .= $email."'";
+
+      $re = mysqli_query($con, $query);
+      if (mysqli_affected_rows($con) <= 0) {
+         self::deleteByEmail($email);
+         mysqli_close($con);
+         return false;
+      }
+      mysqli_close($con);
+      return $re;
    }
 
    public static function getTypesus()

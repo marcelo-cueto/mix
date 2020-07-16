@@ -14,10 +14,6 @@ if ($_POST) {
    $_SESSION['dni'] = $_POST['dni'];
    $_SESSION['cid'] = substr(md5(rand()), 0, 5);
    $_POST['cid'] = $_SESSION['cid'];
-   //require_once 'ajax/mobbex.php';
-   header('Location: typesus_web.php');
-   exit();
-   /*
    $sus = Suscriptor::existsByEmail($_SESSION['email']);
    if (!$sus) {
       require_once 'ajax/mobbex.php';
@@ -28,7 +24,6 @@ if ($_POST) {
    unset($_SESSION['dni']);
    unset($_SESSION['cid']);
    Alert::set_msg('Ya hay un suscriptor registrado con este email', 'danger');
-   */
 }
 
 require_once 'header_web.php';
