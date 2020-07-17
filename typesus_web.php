@@ -4,20 +4,12 @@ require_once 'admin/controllers/suscriptor.php';
 
 if ($_POST) {
    if ($_POST['uid'] == 'free') {
-      var_dump('Gracias por suscribirte. Nos estaremos poniendo en contacto con vos');
+      header("Location: pago.php");
       exit();
-   }
-   var_dump($_POST['uid']);
-   $result = Suscriptor::mobbexsuscriber($_SESSION['email'], $_SESSION['dni'], $_POST['uid']);
-   var_dump($result);
+   } 
+   $result = Suscriptor::mobbexsuscriber($_SESSION['sus_email'], $_SESSION['sus_dni'], $_POST['uid']);
+   header("Location: $result");
    exit();
-   $_SESSION['shorten_url'] = $_POST['shorten_url'];
-   header('Location: pago.php');
-   exit();
-
-   unset($_SESSION['email']);
-   unset($_SESSION['dni']);
-   
 }
 
 $typesus = Suscriptor::getTypesus();
@@ -26,7 +18,7 @@ require_once 'header_web.php';
 
 <div class="container">
    <div class="separador"></div>
-   <?php if (empty($_SESSION['email'])) { ?>
+   <?php if (empty($_SESSION['sus_email'])) { ?>
       <div class="section-intro text-center pb-65px">
          <h2 class="section-intro__title">Planes</h2>
          <p>Estos son los distintos tipos de suscripción que tenemos para ofrecerte.</p>
@@ -47,7 +39,7 @@ require_once 'header_web.php';
             <ul class="list-unstyled mt-3 mb-4">
                <p>Descripcion</p>
             </ul>
-            <?php if (empty($_SESSION['email'])) { ?>
+            <?php if (empty($_SESSION['sus_email'])) { ?>
                   <button onclick="location.href='register.php'" class="btn btn-lg btn-block btn-outline-primary">Suscribirme gratis</button>
             <?php } else { ?>
                <form action="typesus_web.php" method="post">
@@ -98,7 +90,7 @@ require_once 'header_web.php';
                <ul class="list-unstyled mt-3 mb-4">
                   <p><?php echo $t['description']; ?></p>
                </ul>
-               <?php if (empty($_SESSION['email'])) { ?>
+               <?php if (empty($_SESSION['sus_email'])) { ?>
                      <button onclick="location.href='register.php'" class="btn btn-lg btn-block btn-primary">Suscribirme gratis</button>
                <?php } else { ?>
                   <form action="typesus_web.php" method="post">

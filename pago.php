@@ -1,35 +1,22 @@
 <?php
 session_start();
-//var_dump($_SESSION['shorten_url']);
-//exit();
+if (!isset($_SESSION['sus_email'])) {
+   header('Location: home_web.php');
+   exit();
+}
 require_once 'header_web.php'; ?>
 
 <div class="container">
    <div class="separador"></div>
    <div class="section-intro text-center pb-65px">
-      <h2 class="section-intro__title">Ya casi terminamos! <br>
-         Este es tu c&oacute;digo de cliente: <?php echo $_SESSION['cid'] ?> <br>
-         Te pedimos que lo recuerdes ya que te será solicitado en el pr&oacute;ximo paso.
-      </h2>
-      <a href="<?php echo $_SESSION['shorten_url'] ?>">
-         <button type="button">Continuar</button>
+      <h2 class="section-intro__title">Suscripción exitosa!</h2>
+      <p>Gracias por suscribirte. Nos estaremos poniendo en contacto con vos.</p>
+      <a href="blog_web.php">
+         <button type="button" class="button mt-xl-3">Volver</button>
       </a>
    </div>
    <div class="separador"></div>
 </div>
-
-'{
-   "result":true,
-   "data":{
-      "uid":"isRi2zLPT",
-      "reference":"6",
-      "sourceUrl":"https://mobbex.com/p/subscriptions/PN~LGKyfT/subscriber/isRi2zLPT/source",
-      "subscriberUrl":"https://mobbex.com/p/subscriptions/PN~LGKyfT/subscriber/isRi2zLPT",
-      "subscription":{
-            "uid":"PN~LGKyfT"
-      }
-   }
-}'
 
 <?php require_once 'footer_web.php'; ?>
 

@@ -84,7 +84,6 @@ $otras = $_POST['otras'];
 $matricula = $_POST['matricula'];
 $conocio = $_POST['conocio'];
 $comentario = $_POST['coment'];
-$mobbex_id = $_POST['cid'];
 
 // Datos para mail
 $mensaje .= ' ' . $otras;
@@ -93,13 +92,12 @@ $mensaje .= 'Matrícula: ' . $matricula . $eol;
 $mensaje .= 'Cómo nos conoció: ' . $conocio . $eol;
 $mensaje .= 'Comentarios: ' . $comentario . $eol;
 
-print_r($mensaje);
-
 $header = 'From: no-responder@enlaceprofesional.com.ar' . $eol;
 $header .= 'Reply-To: info@enlaceprofesional.com.ar' . $eol;
 $header .= 'X-Mailer: PHP/' . phpversion();
 //$mail = mail('info@enlaceprofesional.com.ar', 'Profesional suscripto', $mensaje, $header);
 
+/*
 function verify($resultado)
 {
    if (!$resultado) {
@@ -124,6 +122,7 @@ function existe_usuario($email, $conn)
    $existe_usuario = mysqli_num_rows($resultado);
    return $existe_usuario;
 }
+*/
 
 $pass = sha1($pass);
 if (
@@ -131,6 +130,21 @@ if (
    ($sueldos != 'no' || $sp != 'no' || $mn != 'no' || $impuestos != 'no' ||
       $cb != 'no' || $au != 'no' || $ce != 'no' || $gs != 'no' || $jd != 'no')
 ) {
+   $query = "INSERT INTO suscriptions
+      (name, surname,tel, email, type, pass, profesion,sueldos,matricula,sociedades,monotributo,impuestos, autonomos, judiciales,gestion, certificaciones, contabilidad, otras, recomendado, comentario)
+       VALUES
+       ('$name', '$surname','$tel', '$email', '$type', '$pass','$profesion',
+          '$sueldos','$matricula','$sp','$mn','$impuestos', '$au', '$jd', '$gs', '$ce','$cb','$otras','$conocio', '$comentario')";
+      $resutltado = mysqli_query($conn, $query);
+      $_SESSION['sus_dni'] = mysqli_insert_id($conn);
+      $_SESSION['sus_email'] = $email;
+      mysqli_close($conn);
+      //verify($resutltado);
+      //$_SESSION['sus_email'] = $_POST['email'];
+      //$_SESSION['sus_dni'] = $_POST['dni'];
+      
+}
+/*
    $existe = existe_usuario($email, $conn);
    if ($existe > 0) {
       $info = 3;
@@ -142,12 +156,15 @@ if (
        ('$name', '$surname','$tel', '$email', '$type', '$pass','$profesion',
           '$sueldos','$matricula','$sp','$mn','$impuestos', '$au', '$jd', '$gs', '$ce','$cb','$otras','$conocio', '$comentario')";
       $resutltado = mysqli_query($conn, $query);
-
-
+      var_dump($resutltado);
+      exit();
       verify($resutltado);
+      //$_SESSION['sus_email'] = $_POST['email'];
+      //$_SESSION['sus_dni'] = $_POST['dni'];
       close($conn);
    }
 } else {
    $info = 4;
    echo json_encode($info);
 }
+*/

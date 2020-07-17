@@ -2,27 +2,14 @@
 session_start();
 require_once 'admin/controllers/suscriptor.php';
 require_once 'admin/controllers/Alert.php';
-/*if ($_POST) {
-   require_once('ajax/mobbex.php');
-   $email = $_POST['email'];
-   $dni = $_POST['dni'];
-   $a = Suscriptor::mobbexsuscriber($email, $dni);
-   var_dump($a);
-} */
+
 if ($_POST) {
-   $_SESSION['email'] = $_POST['email'];
-   $_SESSION['dni'] = $_POST['dni'];
-   $_SESSION['cid'] = substr(md5(rand()), 0, 5);
-   $_POST['cid'] = $_SESSION['cid'];
-   $sus = Suscriptor::existsByEmail($_SESSION['email']);
+   $sus = Suscriptor::existsByEmail($_POST['email']);
    if (!$sus) {
       require_once 'ajax/mobbex.php';
       header('Location: typesus_web.php');
       exit();
    }
-   unset($_SESSION['email']);
-   unset($_SESSION['dni']);
-   unset($_SESSION['cid']);
    Alert::set_msg('Ya hay un suscriptor registrado con este email', 'danger');
 }
 
@@ -34,9 +21,11 @@ require_once 'header_web.php';
       <div class="row">
          <div class="col-md-12 col-md-push-1 animate-box" style='margin-top:1%'>
 
-
             <div class="col-md-9 animate-box center">
                <h3>Registro de profesional</h3>
+               <div class="mensaje">
+                  <?php echo Alert::show_msg(); ?>
+               </div>
                <form id='register' action="register.php" class='needs-validation' method='post' oninput='passR.setCustomValidity(passR.value != pass.value ? "Las contraseñas no coinciden." : "")'>
                   <div class="row form-group">
                      <div class="col-md-6">
@@ -176,17 +165,12 @@ require_once 'header_web.php';
                   <div class="form-group">
                      <input type="hidden" name="latitud" id="latitud" value="">
                      <input type="hidden" name="longitud" id="longitud" value="">
-                     <input id='pago' type="submit" value="Enviar y suscribirme acá" class="button mt-xl-3">
-                     <button type="button" class="button mt-xl-3" name="button">Enviar y solicitar contacto</button>
+                     <input id='pago' type="submit" value="Enviar y suscribirme" class="button mt-xl-3">
                   </div>
 
                </form>
-               <div class="mensaje">
-
-               </div>
             </div>
          </div>
-
       </div>
    </div>
    <div id="map" class="colorlib-map"></div>

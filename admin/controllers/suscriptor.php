@@ -413,8 +413,8 @@ class Suscriptor
          CURLOPT_HTTPHEADER => array(
             "Content-Type: application/json",
             "cache-control: no-cache",
-            //"x-access-token: 43d860e6-b37c-4724-8743-2c9167e39121",
-            //"x-api-key: L7buJqqodxsKdU11pIayTtUR1UbQsGgypIfqI4cT",
+            //"x-access-token: 44bca490-8e4b-4d3f-bf86-508bbc07acb3",
+            //"x-api-key: cCTVKLuqjA6sAs~iLT7YHOvXQLATeO0BvpoybFc5",
 
             // Credenciales de prueba
             "x-access-token: d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
@@ -457,7 +457,7 @@ class Suscriptor
          return false;
       }
       mysqli_close($con);
-      return $re;
+      return $data['sourceUrl'];
    }
 
    public static function getTypesus()
